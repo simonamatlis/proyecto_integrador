@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 });
 //producto/agregar
 
+router.get("/productos", productController.product)
 router.get('/agregar', productController.newProduct );
 
 
