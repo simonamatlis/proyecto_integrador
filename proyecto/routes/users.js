@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get("/users", usersController.users)
+router.get("/users", userController.users)
 
 //users/register:
 
