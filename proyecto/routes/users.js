@@ -8,12 +8,12 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get("/users", userController.users)
+router.get("/users", usersController.users)
 
 //users/register:
 
-router.get('/register', userController.register);
+router.get('/register', usersController.register);
 
-router.get('/login', userController.login);
+router.get('/login', usersController.login);
 
 module.exports = router;
