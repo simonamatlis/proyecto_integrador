@@ -3,10 +3,6 @@ var router = express.Router();
 
 const usersController = require("../controllers/userController");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
 router.get("/users", usersController.users)
 
