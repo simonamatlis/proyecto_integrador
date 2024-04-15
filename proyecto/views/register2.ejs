@@ -1,13 +1,20 @@
 <html>
     <head>
+        <% if (data.usuario.userName != null) {
+            <%- include ('./partials/headerLogin') %>
+        }
+        <%else { <%- include ('./partials/head') %>}
+        
 
     </head>
+
     <body>
         <h1> register</h1>
+        <h2> Crea tu usuario para poder sumergirte en el mundo de la moda!</h2>
         <form action=" /users/register" method="GET">
 
             <div>
-                <!-- email: campo de tipo email..-->
+                
                 <label for = "email"> Email: </label>
                 <input type="email" name="mail" value="">
 
@@ -15,7 +22,7 @@
 
 
             <div>
-                <!-- usuario: campo de tipo texto..-->
+                
                 <label for = "user"> Nombre Usuario: </label>
                 <input type="text" name="user" value="">
 
@@ -23,26 +30,26 @@
 
            
             <div> 
-                <!-- contraseña: campo de tipo contraseña.-->
+               
                 <label for="Pass"> Contraseña:</label>
                 <input type="password" id="Pass" name="contraseña"  value="">
             </div>
 
             <div> 
-                <!--fecha de nacimiento: campo de tipo fecha. --> 
+               
                 <label for="date"> Fecha de nacimiento </label>
                 <input type="date" id="date" name="fecha" value=""> 
             </div>
 
             <div> 
-                <!--nro de documento: campo de tipo numérico.--> 
+                
                 <label for="dni"> Nro de documento</label>
                 <input type="number" id="dni" name="documento" value=""> 
 
             </div>
 
             <div> 
-                <!--foto de perfil: campo de tipo texto. -->
+                
                 <label for="profilepic"> Foto de perfil </label>
                 <input type="text" id="profilepic" name="fotoPerfil" value="">
             </div>

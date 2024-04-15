@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%- include ('./partials/head') %>
+        
+            <% if (data.usuario.userName != null) {
+                <%- include ('./partials/headerLogin') %>
+            }
+            <%else { <%- include ('./partials/head') %>}
+            
+    
     </head>
     <body>
         <h1> Login</h1>
+        <h2> Welcome back!</h2>
         <form action=" /users/login" method="GET">
 
             <div>
-                <!-- usuario: campo de tipo email.-->
+                
                 <label for = ""> Usuario: </label>
                 <input type="email" name="mail" value="">
 
@@ -16,14 +23,13 @@
 
            
             <div> 
-                <!-- contraseña: campo de tipo contraseña.-->
+                
                 <label for="Pass">contraseña:</label>
                 <input type="password" id="Pass" name= contraseña value="">
             </div>
 
             <div> 
-                <!-- recordarme: campo de tipo checkbox.-->
-                 <!-- yo lo voy a hacer modo radio, si o no.-->
+                
                 <label for="recordarme"> recordarme:</label>
                 <input type="checkbox" name= recordarme value="Si">
                 

@@ -1,27 +1,33 @@
 <html>
     <head>
-
+       
+            <% if (data.usuario.userName != null) {
+                <%- include ('./partials/headerLogin') %>
+            }
+            <%else { <%- include ('./partials/head') %>}
+            
     </head>
+    
     <body>
-        <h1> Agregar producto</h1>
+        <h1> Agrega productos!</h1>
         <form action=" /producto/agregar" method="GET">
 
             <div>
-                <!-- imagen.-->
+                
                 <label for = "imgProducto"> Imagen del producto: </label>
                 <input type="file" name="imgProducto" value="">
 
             </div>
 
             <div>
-                <!-- nombre del producto.-->
+                
                 <label for = "nameProducto"> Nombre del producto: </label>
                 <input type="text" name="nameProducto" value="">
 
             </div>
 
             <div>
-                <!-- descripción del producto.-->
+                
                 <label for = "descProducto"> descripción del producto: </label>
                 <input type="text" name="descProducto" value="">
 
