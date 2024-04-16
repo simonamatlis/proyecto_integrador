@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('./partials/head') %>
+<body>
+	<!-- Header -->
+	<%- include('./partials/headerLogin') %>
+	<!-- /Header -->
+	
+	<!-- product detail -->
+	<div class="container products-wrapper">
+		<div class="d-flex align-items-center">
+			<h2 class="products-title"><%= producto[0].nombre%> </h2> 
+			<p class="product-detail-description">
+				<a href="/product/add">Editar</a>
+			</p>
+		</div>
+		<div class="product-detail">
+			<div class="row">
+				<article class="col-12 col-lg-8 product-detail-info">
+					<img src=<%= producto[0].imagen%> alt="" class="product-detail-img">
+					<p class="product-detail-description"><%= producto[0].description%></p>
+				</article>
+				<div class="col-12 col-lg-4">
+					<section class="comments">
+						<% for( let index = 0; index < producto[0].comentarios.length; index++ ) { %>
+								<img src= <%= producto[0].comentarios.imagen%> alt=''> 
+								<%= producto[0].comentarios.nombreUsuario%>
+								<%= producto[0].comentarios.comentario%>
+						<% } %>
+					</section>
+
+					<form class="form" action="" method="POST">
+						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+					</form>
+					<hr>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /product detail -->
+
+	<!-- footer -->
+	<%- include('./partials/footer') %>
+	<!-- /footer -->
+
+</body>	
+</html>

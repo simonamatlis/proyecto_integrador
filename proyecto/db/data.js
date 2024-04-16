@@ -5,9 +5,9 @@ Los datos del usuario deben mostrarse en todos los lugares donde aparezca el hea
 const Data = {
 
     usuario:  {
-            Email: 'luciana@gmail.com',
+            email: 'luciana@gmail.com',
             userName:"lucianaPerez",
-            Password:"luCHi" ,
+            password:"luCHi" ,
             bday:"2024-04-08",
             dni:"45891234",
             profilePic: "/images/users/profilepic.avif"},
@@ -15,7 +15,7 @@ const Data = {
 
     producto: [
         {
-            Imagen: 'images/products/remera.jpng',
+            imagen: 'images/products/remera.jpng',
             nombre: 'remera',
             description: 'Remera escote recto y hombros semicubiertos.',
             comentarios: [
@@ -40,7 +40,7 @@ const Data = {
 
         },
         {
-            Imagen: '/images/products/pantalon.jpeg',
+            imagen: '/images/products/pantalon.jpeg',
             nombre: 'pantalon',
             description: 'Pantalón de tiro alto y cintura con trabillas. Pierna recta.',
             comentarios: [
@@ -65,7 +65,7 @@ const Data = {
 
         },
         {
-            Imagen: 'proyecto_integrador/proyecto/public/images/products/JeanAzul.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/JeanAzul.jpeg',
             nombre: 'Jean',
             description: 'Jean Slim Fit - Skinny Leg - Tiro Alto',
             comentarios: [
@@ -90,7 +90,7 @@ const Data = {
 
         },
         {
-            Imagen: 'proyecto_integrador/proyecto/public/images/products/top.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/top.jpeg',
             nombre: 'Top',
             description: 'Top corto de escote pico cruzado y manga sisa.',
             comentarios: [
@@ -115,7 +115,7 @@ const Data = {
 
         },
         {
-            Imagen: 'proyecto_integrador/proyecto/public/images/products/campera.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/campera.jpeg',
             nombre: 'Campera',
             description: 'Cazadora corta de cuello solapa con manga larga.',
             comentarios: [
@@ -140,7 +140,7 @@ const Data = {
 
         },
         {
-            Imagen: 'proyecto_integrador/proyecto/public/images/products/vestido.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/vestido.jpeg',
             nombre: 'vestido',
             description: 'Vestido corto de escote recto y hombros descubiertos.',
             comentarios: [
@@ -165,7 +165,7 @@ const Data = {
 
         },
         {
-            Imagen: 'proyecto_integrador/proyecto/public/images/products/zapatos.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/zapatos.jpeg',
             nombre: 'Zapatos',
             description: 'Zapato destalonado de tacón kitten. Tira trasera con cierre mediante hebilla. Acabado en punta.',
             comentarios: [
@@ -190,7 +190,7 @@ const Data = {
 
         },
         {
-            Imagen: 'proyecto_integrador/proyecto/public/images/products/pollera.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/pollera.jpeg',
             nombre: 'Pollera',
             description: 'Falda pantalón de tiro alto.',
             comentarios: [
@@ -215,7 +215,7 @@ const Data = {
 
         },
         {
-            Imagen: 'proyecto_integrador/proyecto/public/images/products/blazer.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/blazer.jpeg',
             nombre: 'Blazer',
             description: 'Blazer abierta de cuello y solapa con manga larga acabada en vuelta y hombreras',
             comentarios: [
@@ -240,7 +240,7 @@ const Data = {
 
         },
         {
-            Imagen: 'proyecto_integrador/proyecto/public/images/products/mono.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/mono.jpeg',
             nombre: 'Mono',
             description: 'Mono largo de cuello redondo con manga sisa y manga corta.',
             comentarios: [

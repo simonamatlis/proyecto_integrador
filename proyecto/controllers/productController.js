@@ -3,7 +3,8 @@ let productController = {
         res.render('newProduct');
 
     },
-    product: function(){
+    product: function(req, res){
+        res.render('product');
 
     }
 }; 

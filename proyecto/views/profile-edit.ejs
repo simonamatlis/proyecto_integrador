@@ -3,23 +3,19 @@
 <!-- Include Head -->
 <%- include('./partials/head') %>
 
-
 <body>
 	<!-- Header -->
-	<% if (data.usuario.userName != null) {
-		<%- include ('./partials/headerLogin') %>
-	}
-	<%else { <%- include ('./partials/head') %>}
-	
+	<%- include('./partials/headerLogin') %>
+	<!-- /Header -->
+
+	<!-- Novedades -->
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Registrate</h2>
+				<h2 class="products-title">Editar mi perfil</h2>
 			</div>
-			
-			
 
-			<form action=" /users/register" method="GET">
+			<form action=" /users/editar" method="GET">
 
 				<div>
 					
@@ -63,19 +59,18 @@
 				</div>
 
 
+				<button type="submit">Enviar datos</button>
+
+
 
 			</form> 
-		
-		
 		</div>
-		
+			
 
 	</div>
-			
+	<!-- footer -->
 	<%- include('./partials/footer') %>
-	
-
-
+	<!-- /footer -->
 </body>
 
 </html>
