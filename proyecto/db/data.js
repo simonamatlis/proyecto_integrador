@@ -2,7 +2,7 @@
 Los datos del usuario deben mostrarse en todos los lugares donde aparezca el header logueado y en “mi perfil”.
  */
 
-const Data = {
+const data = {
 
     usuario:  {
             email: 'luciana@gmail.com',
@@ -270,4 +270,4 @@ const Data = {
 
 }
 
-module.exports = Data;
+module.exports = data;

@@ -1,19 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-const usersController = require("../controllers/userController");
+const userController = require("../controllers/userController");
 
 
-router.get("/users", usersController.users)
 
-//users/register:
 
-router.get('/register', usersController.register);
+router.get('/register', userController.register);
 
-router.get('/login', usersController.login);
+router.get('/login', userController.login);
 
-router.get('/profile', usersController.profile);
+router.get('/profile', userController.profile);
 
-router.get('/edit', usersController.profileEdit);
+router.get('/edit', userController.profileEdit);
 
 module.exports = router;
