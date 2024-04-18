@@ -15,8 +15,8 @@ const data = {
 
     producto: [
         {
-            imagen: 'images/products/remera.jpng',
-            nombre: 'remera',
+            imagen: 'images/products/remera.jpeg',
+            nombre: 'Remera',
             description: 'Remera escote recto y hombros semicubiertos.',
             comentarios: [
                 {
@@ -41,7 +41,7 @@ const data = {
         },
         {
             imagen: '/images/products/pantalon.jpeg',
-            nombre: 'pantalon',
+            nombre: 'Pantalón',
             description: 'Pantalón de tiro alto y cintura con trabillas. Pierna recta.',
             comentarios: [
                 {
@@ -65,7 +65,7 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/JeanAzul.jpeg',
+            imagen: 'proyecto_integrador/proyecto/public/images/products/jean.jpeg',
             nombre: 'Jean',
             description: 'Jean Slim Fit - Skinny Leg - Tiro Alto',
             comentarios: [
