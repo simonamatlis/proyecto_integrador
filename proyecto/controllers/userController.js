@@ -10,11 +10,11 @@ const userController = {
         res.render('login', {title: 'login', usuario: data.usuario});
     },
     profile: function(req,res){
-        res.render ('profile',{title: 'Profile', usuario: data.usuario});
+        res.render ('profile',{title: 'Profile', data: data});
         
     },
     profileEdit: function (req,res){
-        res.render('profileEdit',{title: 'Edit profile', usuario: data.usuario});
+        res.render('profile-edit',{title: 'Edit profile', usuario: data.usuario});
     }
 
 }
