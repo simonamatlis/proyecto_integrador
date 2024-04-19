@@ -14,7 +14,7 @@ const userController = {
         
     },
     profileEdit: function (req,res){
-        res.render('prodileEdit',{title: 'Edit profile', usuario: data.usuario});
+        res.render('profileEdit',{title: 'Edit profile', usuario: data.usuario});
     }
 
 }
