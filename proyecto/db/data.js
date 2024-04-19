@@ -15,8 +15,8 @@ const data = {
 
     producto: [
         {
-            imagen: 'images/products/remera.jpng',
-            nombre: 'remera',
+            imagen: '/images/products/remera.jpeg',
+            nombre: 'Remera',
             description: 'Remera escote recto y hombros semicubiertos.',
             comentarios: [
                 {
@@ -41,7 +41,7 @@ const data = {
         },
         {
             imagen: '/images/products/pantalon.jpeg',
-            nombre: 'pantalon',
+            nombre: 'Pantalón',
             description: 'Pantalón de tiro alto y cintura con trabillas. Pierna recta.',
             comentarios: [
                 {
@@ -65,7 +65,7 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/JeanAzul.jpeg',
+            imagen: '/images/products/jean.jpeg',
             nombre: 'Jean',
             description: 'Jean Slim Fit - Skinny Leg - Tiro Alto',
             comentarios: [
@@ -90,9 +90,9 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/top.jpeg',
+            imagen: '/images/products/top.jpeg',
             nombre: 'Top',
-            description: 'Top corto de escote pico cruzado y manga sisa.',
+            description: 'Top cropped de cuello subido y manga sisa.',
             comentarios: [
                 {
                     nombreUsuario: 'Juana',
@@ -115,7 +115,7 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/campera.jpeg',
+            imagen: '/images/products/campera.jpeg',
             nombre: 'Campera',
             description: 'Cazadora corta de cuello solapa con manga larga.',
             comentarios: [
@@ -140,7 +140,7 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/vestido.jpeg',
+            imagen: '/images/products/vestido.jpeg',
             nombre: 'vestido',
             description: 'Vestido corto de escote recto y hombros descubiertos.',
             comentarios: [
@@ -165,24 +165,24 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/zapatos.jpeg',
-            nombre: 'Zapatos',
-            description: 'Zapato destalonado de tacón kitten. Tira trasera con cierre mediante hebilla. Acabado en punta.',
+            imagen: '/images/products/zapatos.jpeg',
+            nombre: 'Chaleco',
+            description: 'Chaleco de cuello pico y manga sisa. Acabados en rib.',
             comentarios: [
                 {
                     nombreUsuario: 'Matias',
-                    comentario: 'Mis nuevos zapatos son muy cómodos, puedo usarlos todo el día sin problemas.',
+                    comentario: '¡Ideal para un look fresco y casual!',
                     imagen: '/images/users/4.avif',
 
                 },
                 {
                     nombreUsuario: 'Ana',
-                    comentario: 'El diseño de mis zapatos nuevos es muy moderno, estoy muy feliz con la elección..',
+                    comentario: 'El detalle del cuello pico le da un toque moderno.',
                     imagen: '/images/users/5.jpeg',
                 },
                 {
                     nombreUsuario: 'Luciana',
-                    comentario: 'Qué buen material tienen mis zapatos nuevos, se nota la calidad en cada paso.',
+                    comentario: 'Perfecto para combinar con camisetas o blusas debajo.',
                     imagen: '/images/users/1.webp',
 
                 }
@@ -190,7 +190,7 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/pollera.jpeg',
+            imagen: '/images/products/pollera.jpeg',
             nombre: 'Pollera',
             description: 'Falda pantalón de tiro alto.',
             comentarios: [
@@ -215,7 +215,7 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/blazer.jpeg',
+            imagen: '/images/products/blazer.jpeg',
             nombre: 'Blazer',
             description: 'Blazer abierta de cuello y solapa con manga larga acabada en vuelta y hombreras',
             comentarios: [
@@ -240,7 +240,7 @@ const data = {
 
         },
         {
-            imagen: 'proyecto_integrador/proyecto/public/images/products/mono.jpeg',
+            imagen: '/images/products/mono.jpeg',
             nombre: 'Mono',
             description: 'Mono largo de cuello redondo con manga sisa y manga corta.',
             comentarios: [
