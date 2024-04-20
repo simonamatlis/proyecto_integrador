@@ -3,7 +3,7 @@ const data = require("../db/data");
 const productController = {
 
     newProduct : function(req,res){
-        res.render('newProduct', {title: 'Añadir producto', usuario: data.usuario});
+        res.render('product-add', {title: 'Añadir producto', userName: data.usuario.userName});
 
     },
     product: function(req, res){
