@@ -6,10 +6,12 @@
 
 <body>
 	<!-- Header -->
-	<% if (data.usuario.userName != null) {
-		<%- include ('./partials/headerLogin') %>
-	}
-	<%else { <%- include ('./partials/head') %>}
+	<% if (data.usuario.userName != null) { %>
+		<%- include ("./partials/headerLogin") %>
+
+	<% } else { %> 
+		<%- include ('./partials/head') %>
+	<% } %>
 	
 	<div class="container products-wrapper">
 		<div class="row">
@@ -19,7 +21,7 @@
 			
 			
 
-			<form action=" /users/register" method="GET">
+			<form action="/users/register" method="GET">
 
 				<div>
 					

@@ -18,16 +18,16 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src=<%= producto[0].imagen%> alt="" class="product-detail-img">
-					<p class="product-detail-description"><%= producto[0].description%></p>
+					<img src= <%= producto[0].imagen %> alt="" class="product-detail-img">
+					<p class="product-detail-description"><%= producto[0].description %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
 						<% for( let index = 0; index < producto[0].comentarios.length; index++ ) { %> 
 							<article>
-								<img src= <%= producto[0].comentarios[index].imagen%> alt=''> 
-								<%= producto[0].comentarios[index].nombreUsuario%>
-								<%= producto[0].comentarios[index].comentario%>
+								<img src= <%= producto[0].comentarios[index].imagen %> alt=''> 
+								<%= producto[0].comentarios[index].nombreUsuario %>
+								<%= producto[0].comentarios[index].comentario %>
 							</article>
 						<% } %>
 					</section>
