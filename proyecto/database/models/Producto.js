@@ -1,5 +1,3 @@
-
-
 module.exports = function(sequelize, dataTypes) {
 
     let alias = "Producto"
