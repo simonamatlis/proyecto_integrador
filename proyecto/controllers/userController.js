@@ -1,5 +1,6 @@
 const data = require("../db/data");
 
+
 const userController = {
     register : function(req,res){
         res.render('register',{title: 'Register'});
