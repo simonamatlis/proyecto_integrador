@@ -1,5 +1,5 @@
-const data = require("../db/data");
 
+const db =require('../database/models');
 
 const userController = {
     register : function(req,res){
