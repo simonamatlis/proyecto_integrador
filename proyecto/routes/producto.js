@@ -6,7 +6,9 @@ var router = express.Router();
 //producto/agregar
 
 router.get("/productos", productController.product)
-router.get('/agregar', productController.newProduct );
+
+router.get('/agregar', productController.newProduct )
+router.post('/agregar', productController.guardaInfo );
 
 
 module.exports = router;
