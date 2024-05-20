@@ -3,10 +3,12 @@ const db =require('../database/models');
 const productController = {
 
     newProduct : function(req,res){
+        //debería poner db.usuario.id_usuario?
         return res.render('productAdd', {title: 'Añadir producto', userName: data.usuario.userName});
 
     },
     product: function(req, res){
+        //debería poner db.productos?
         res.render('product',{title: 'detalle del producto', producto: data.producto});
 
     },
