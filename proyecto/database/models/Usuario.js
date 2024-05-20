@@ -32,11 +32,13 @@ let config= {
     tableName: 'usuario',
     timestamps: true, 
     underscored: true
-}
+};
 
 
-let Usuario = sequelize.define(alias, cols, config)
-return Usuario
+const  Usuario = sequelize.define(alias, cols, config);
+
+
+return Usuario;
 
 
 
