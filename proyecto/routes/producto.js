@@ -8,7 +8,7 @@ var router = express.Router();
 router.get("/productos", productController.product)
 
 router.get('/agregar', productController.newProduct )
-router.post('/agregar', productController.guardaInfo );
+router.post('/agregarUpdated', productController.guardaInfo );
 
 
 module.exports = router;
