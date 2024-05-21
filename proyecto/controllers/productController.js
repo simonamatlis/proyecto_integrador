@@ -16,7 +16,7 @@ const productController = {
         //return res.send(req.body)
         let form = req.body;
         db.productos.create(form)
-        .then(function(result){
+        .then(function(result){ // en vez de result va form?
             return res.redirect ('/product')
         }).catch (error => console.log(error))
     }
