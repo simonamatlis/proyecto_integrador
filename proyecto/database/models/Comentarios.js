@@ -27,6 +27,17 @@ let config = {
 
 
 let Comentario = sequelize.define(alias, cols, config)
+
+Comentario.associate = function(models){
+    Comentario.belongsTo(models.Producto, {
+        as: "producto" , 
+        foreignkey: "producto_id"
+    }),
+    Comentario.belongsTo(models.User, {
+        as: "usuario",
+        foreignkey: "user_id"
+    })
+}
 return Comentario
     
     
