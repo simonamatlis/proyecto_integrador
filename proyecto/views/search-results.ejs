@@ -23,40 +23,39 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 			
-			<h2 class="col-12"> <i>
-				<div class="container products-wrapper">
-					<div class="d-flex align-items-center">
-						<h2 class="products-title"><%= producto[0].nombre %> </h2> 
-						<p class="product-detail-description">
-							<a href="/product/agregar">Editar</a>
-						</p>
-					</div>
-					<div class="product-detail">
-						<div class="row">
-							<article class="col-12 col-lg-8 product-detail-info">
-								<img src=<%= producto[0].imagen %> alt="" class="product-detail-img">
-								<p class="product-detail-description"><%= producto[0].description %></p>
+			<section class="bloque">
+				<% if (lista != undefined && lista.length > 0) { %>
+				<% for (let i = lista.length - 1; i >= 0; i--) { %>
+				        <div class="col-12 col-lg-3">
+						<section class = "product-box">
+							<figure class="product-box_image">
+								<img src="<%= lista[i].imagenes %>" alt="<%= lista[i].nombreproducto %>">
+							</figure>
+							<article class="product-box_data">
+								<h2>
+									<a href="/product/detalle/id/<%=lista[i].id%>">
+									<%= lista[i].nombreproducto %>
+								   </a>
+								</h2>
+								<p>
+									<%= lista[i].descripcionproducto %>
+								</p>
+								<h5>
+									<a href="/profile/<%=lista[i].usuario.username%>">
+									<%= lista[i].usuario.username %>
+								</a>
+								</h5>
 							</article>
-							<div class="col-12 col-lg-4">
-								<section class="comments">
-									<% for( let index = 0; index < producto[0].comentarios.length; index++ ) { %>
-											<img src= <%= producto[0].comentarios.imagen %> alt=''> 
-											<%= producto[0].comentarios.nombreUsuario %>
-											<%= producto[0].comentarios.comentario %>
-									<% } %>
-								</section>
-			
-								<form class="form" action="" method="POST">
-									<input class="form-input" type="text" value="" placeholder="Agregar comentario">
-									<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-								</form>
-								<hr>
-							</div>
-						</div>
-					</div>
+		
+					</section>
 				</div>
-
-			</h2>
+			    <% } %>
+			    <% } else { %>
+				     <p class="error"> <%= errors.message %> </p>
+				<% } %>
+				</div>
+			</div>
+			</section>
 
 
 	<!-- footer -->
