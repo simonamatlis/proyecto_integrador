@@ -1,8 +1,6 @@
 module.exports = function(sequelize, dataTypes) {
 
     let alias = "Producto"
-
-
     let cols = {
         id_producto : {
             autoIncrement: true,
@@ -20,20 +18,26 @@ module.exports = function(sequelize, dataTypes) {
         },
         descripcion_producto : {
             type: dataTypes.STRING,
-        } }
+        },
+        updatedAt:{
+            type: dataTypes.DATE,
+        },
+        deletedAt: {
+            type: dataTypes.DATE
+        } };
 
     let config= {
         tableName: 'producto',
         timestamps: true, 
         underscored: true 
-    }
+    };
 
     let Producto = sequelize.define(alias, cols, config)
 
     Producto.associate = function(models){
         Producto.belongsTo(models.Usuario, {
             as: "usuario",
-            foreignkey: user_id
+            foreignkey: 'user_id'
         }),
 
         Producto.hasMany(models.Comentario, {
@@ -41,7 +45,7 @@ module.exports = function(sequelize, dataTypes) {
             foreignkey: "producto_id"
         })
     }
-return Producto
+    return Producto
 
 
 
