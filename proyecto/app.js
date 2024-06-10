@@ -9,6 +9,7 @@ const db = require('./database/models')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productoRouter = require('./routes/producto')
+var searchresultsRouter = require()
 
 var app = express();
 
