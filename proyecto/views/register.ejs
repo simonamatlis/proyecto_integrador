@@ -6,8 +6,13 @@
 
 <body>
 	<!-- Header -->
-	<%- include('./partials/header') %>
+	<% if (locals.user != undefined){%>
+		<%- include('./partials/headerLogueado')<%} 
+		else {%>
+			<%- include('./partials/header')%> 
+			<% } %>
 	
+
 	
 	<div class="container products-wrapper">
 		<div class="row">

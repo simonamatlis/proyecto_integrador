@@ -22,7 +22,10 @@ module.exports = function(sequelize, dataTypes) {
         }, 
         dni: {
             type: dataTypes.INTEGER,
-        },// foto de perfil 
+        },
+        profilePic:{
+            type: dataTypes.STRING
+        },
         updatedAt:{
             type: dataTypes.DATE,
         },
