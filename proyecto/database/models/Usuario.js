@@ -13,23 +13,32 @@ module.exports = function(sequelize, dataTypes) {
         }, 
         email: {
             type: dataTypes.STRING,
+            allowNull: false
         },
         contra:{
             type: dataTypes.STRING,
+            allowNull: false
         },
         fecha: {
             type: dataTypes.DATE,
+            allowNull: true
         }, 
         dni: {
             type: dataTypes.INTEGER,
+            allowNull: true
         },
         profilePic:{
-            type: dataTypes.STRING
+            type: dataTypes.STRING,
+            allowNull: true
         },
         updatedAt:{
             type: dataTypes.DATE,
+            
         },
         deletedAt: {
+            type: dataTypes.DATE
+        }, 
+        createdAt: {
             type: dataTypes.DATE
         }
         

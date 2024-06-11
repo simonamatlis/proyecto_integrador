@@ -3,14 +3,11 @@ var router = express.Router();
 
 const userController = require("../controllers/userController");
 
-
-
-
 router.get('/register', userController.register);
 router.post ('/registerStore', userController.registerInfo);
 
 router.get('/login', userController.login);
-router.post('/loginStore', userController.loginInfo);
+//router.post('/loginStore', userController.loginInfo); --> falta arreglar, comento para que no sea un problema.
 
 router.get('/profile', userController.profile);
 

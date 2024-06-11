@@ -1,38 +1,39 @@
 const db =require('../database/models');
-
+const bcrypt= require('bcryptjs')
+//falta la parte de conectar la base de datos + vista indicada.
 const userController = {
     register : function(req,res){
-       db.Usuario.create({
-        emailUsuario: req.body.mail,
-        nombreUsuario: req.body.user,
-        passUsuario: req.body.contrasenia,
-        nacimientoUsuario: req.body.fecha,
-        dniUsuario: req.body.documento,
-        fotoUsuario: req.body.fotoPerfil
-       })
-
-    },
+        if (req.session.Usuario){
+            return res.redirect('/users/login')} //si ya está registrado, andá a login. 
+        else{
+            return res.render('register', {title: 'Registrate', usuario: data.usuario});
+    }}, // revisar tema de session y cookies para corregirlo. 
     registerInfo : function (req, res) {
-        let registerForm = req.body;
-        db.Usuario.create(registerForm)
-        .then(function (result) { // en vez de result va registerForm?
+        db.Usuario.create({
+            email: req.body.email,
+            id_user: req.body.user,
+            contra: bcrypt.hashSync(req.body.contrasenia,10), // passw encriptada + sincronizada c/session 
+            fecha: req.body.fecha,
+            dni: req.body.documento,
+            profilePic: req.body.fotoPerfil
+        })
+        .then(function (result) { 
             return res.redirect ('/')     
         }).catch (error => console.log(error))
         
     },
-    // login : function (req,res){
-    //     res.render('login', {title: 'login', usuario: data.usuario});
-    // },
-    // loginInfo: function (req,res){
-    //     let loginForm = req.body;
-    //     db.Usuario.create(loginForm)
-    //     .then(function(result){  //en vez de result va loginForm?
-    //         return res.redirect ('/')
-    //     }).catch (error => console.log(error))
-    //     //lo redirecciona a la pag principal o la de profile?
+    login : function (req,res){
+            if (req.session.Usuario){
+                return res.redirect('/')}
+            else{
+                return res.render('login', {title: 'login', usuario: data.usuario});
+    }},
+    // loginInfo\logOut.
+    // 
+    //     //para esto ver video cookies
+    //     //usa el findbyPk o algo así 
+    //
 
-    // }, 
-    
     profile: function(req,res){
         res.render ('profile',{title: 'Profile', data: data});
         
