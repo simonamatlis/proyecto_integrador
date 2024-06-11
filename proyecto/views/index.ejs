@@ -24,23 +24,56 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Novedades</h2>
+				<h2 class="products-title">Ultimos productos</h2>
 				<p>Ordenados del mas reciente al menos reciente</p>
 			</div>
 
 
 			<!-- Show the "ultimos" products -->
+			<section class="bloque">
+				<% for (let i = lista.length - 1; i >= lista.length - 4; i--) { %>
+                       <div class="col-12 col-sm-6 col-lg-3">
+						<section class = "product-box">
+							   <figure class="product-box_image">
+								<a href="/producto/detalle/id<%=lista[i].id&>">
+								    <img src="<%= lista[i].imgProducto %>" alt="<%= lista[i].nameProducto %>">
+							   </figure>
+							   <article class="product-box_data">
+								<h2>
+									<a href="/producto/detalle/id/<%=lista[i].id%>">
+									<%= lista[i].nameProducto
+									</a>
+								</h2>
+
+								<p> 
+									<%= lista[i].descProducto %>
+								</p>
+								<h5>
+									<a href="7profile/<%=lista[i].usuario.username%>"> 
+										<%= lista[i].usuario.username %>
+									</a>
+								</h5>
+								</article>
+						</section>
+					   </div>
+				}
+			</section>
 			<% for( let index = 0; index < 4; index++ ) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
 						<a href="/producto/productos">
 							<figure class="product-box_image">
-								<img src="<%= productos[index].imagen %>" >
+								<img src="<%= productos[index].imagen %>" alt="<%= productos[i].nombre %>" >
 							</figure>
 							<article class="product-box_data">
 								<h2> <%= productos[index].nombre %></h2>
 								<p><%= productos[index].description %></p>
 								<p>Comentarios: <%= productos[index].comentarios.length %></p>
+								<h5>
+									<a href="/profile/<%= productos[i].usuario.username">
+									<%= productos[i].usuario.username %>
+									</a>
+								</h5>
 							</article>
 						</a>
 					</section>
