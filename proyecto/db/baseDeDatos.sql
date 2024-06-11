@@ -1,4 +1,4 @@
-CREATE schema proyectoInt2; 
+CREATE SCHEMA proyectoInt2; 
 USE proyectoInt2;
 
 --  TABLA DE USUARIOS--

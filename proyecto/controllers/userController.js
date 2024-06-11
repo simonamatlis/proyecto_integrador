@@ -1,6 +1,8 @@
 const db =require('../database/models');
 const bcrypt= require('bcryptjs')
 //falta la parte de conectar la base de datos + vista indicada.
+// EL ALIAS DEL MODELO ES 'Usuario'
+
 const userController = {
     register : function(req,res){
         if (req.session.Usuario){
@@ -8,6 +10,8 @@ const userController = {
         else{
             return res.render('register', {title: 'Registrate', usuario: data.usuario});
     }}, // revisar tema de session y cookies para corregirlo. 
+
+
     registerInfo : function (req, res) {
         db.Usuario.create({
             email: req.body.email,
@@ -22,16 +26,33 @@ const userController = {
         }).catch (error => console.log(error))
         
     },
+
+
     login : function (req,res){
             if (req.session.Usuario){
                 return res.redirect('/')}
             else{
                 return res.render('login', {title: 'login', usuario: data.usuario});
     }},
-    // loginInfo\logOut.
+
+
+    loginInfo: function (req,res, next){
+        let { email, contraseña, recordarme } = req.body
+
+        db.Usuario.findOne( {where: [{email: email  }]})
+        // .then(resultado => {
+        //     if (req.session.Usuario){
+        //         return res.redirect('/')}
+        //     else{
+        //         return res.render('login', {title: 'login', usuario: data.usuario});
+        // } } ) 
+        // --> cambiarlo para que: encuentre el mail y vea si existe el usuario o no. Si existe el usuario, que vea si la contraseña es correcta o no. 
+
+    },
     // 
     //     //para esto ver video cookies
-    //     //usa el findbyPk o algo así 
+    //     //usa el findbyPk --> En routs, se tiene que poner le id
+            //             router.post('/:id, userController.loginInfo) =>         
     //
 
     profile: function(req,res){

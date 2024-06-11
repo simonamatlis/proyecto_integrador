@@ -1,10 +1,8 @@
-const { config } = require("../../.sequelizerc");
-
 module.exports = function(sequelize, dataTypes) {
 
     //alias
     let alias = 'Usuario'
-    //cols
+    //cols: tipo de dato que recibe.
     let cols= {
         id_usuario: {
             autoIncrement: true,
@@ -27,11 +25,11 @@ module.exports = function(sequelize, dataTypes) {
             type: dataTypes.INTEGER,
             allowNull: true
         },
-        profilePic:{
+        profilePic:{ // NO LA TENEMOS EN SQL
             type: dataTypes.STRING,
             allowNull: true
         },
-        updatedAt:{
+        updatedAt:{ // NO LA TENEMOS EN SQL
             type: dataTypes.DATE,
             
         },
@@ -51,7 +49,7 @@ module.exports = function(sequelize, dataTypes) {
         timestamps: true, 
         underscored: true
     };
-
+    
 
     let Usuario = sequelize.define(alias, cols, config);
 
