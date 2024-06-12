@@ -53,16 +53,24 @@ const userController = {
                 where: [{email: nombreUsuario }]
             })
             .then(function(usuarioEncontrado){
-                //ponerlos en session.
-                req.session.user = {
-                    email: usuarioEncontrado.email,
-                    passWord: usuarioEncontrado.pass
-                }//si lo guardo para recordarlo
-                if (recordarme != undefined){
-                    res.cookie('Usuario', nombreUsuario, {maxAge: 1000*60*5}),
-                    res.cookie('Pass', pass, {maxAge: 1000*60*5})
-                }
-                return res.redirect('/');
+                if (usuarioEncontrado){
+                    // si puso bien la contra y existe:
+                    if ( bcrypt.compareSync(contrasenia, usuarioEncontrado.pass)) {
+                        //ponerlos en session.
+                        req.session.user = {
+                            email: usuarioEncontrado.email,
+                            passWord: usuarioEncontrado.pass}
+                        
+                        //si lo guardo para recordarlo
+                        if (recordarme != undefined){
+                            res.cookie('Usuario', nombreUsuario, {maxAge: 1000*60*5}),
+                            res.cookie('Pass', pass, {maxAge: 1000*60*5})
+                        }
+
+                     }  
+                
+                }return res.redirect('/users/profile');
+                
             }).catch (function(e){
                 console.log(e);
             })
