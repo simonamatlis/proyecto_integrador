@@ -33,9 +33,9 @@
 			<section class="bloque">
 				<% for (let i = lista.length - 1; i >= lista.length - 4; i--) { %>
                        <div class="col-12 col-sm-6 col-lg-3">
-						<section class = "product-box">
+						 <section class = "product-box">
 							   <figure class="product-box_image">
-								<a href="/producto/detalle/id<%=lista[i].id&>">
+								<a href="/producto/detalle/id<%=lista[i].id&>" >
 								    <img src="<%= lista[i].imgProducto %>" alt="<%= lista[i].nameProducto %>">
 							   </figure>
 							   <article class="product-box_data">
@@ -54,9 +54,10 @@
 									</a>
 								</h5>
 								</article>
-						</section>
+								
+						 </section>
 					   </div>
-				}
+			<%	} %>
 			</section>
 			<% for( let index = 0; index < 4; index++ ) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
@@ -98,6 +99,7 @@
 		
 		</div>
 	</div>
+
 	<!-- /Novedades -->
 	<!-- Más comentados -->
 	<div class="container products-wrapper">
@@ -106,22 +108,36 @@
 				<h2 class="products-title">Más comentados</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<% for( let index = 3; index < 7; index++ ) { %>
-				<div class="col-12 col-sm-6 col-lg-3">
+
+			<section class="bloque"> 
+				<% for(let i = 3; >= 0; i--) { %>
+					<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="/producto">
-							<figure class="product-box_image">
-								<img src="<%= productos[index].imagen %>" >
-							</figure>
-							<article class="product-box_data">
-								<h2> <%= productos[index].nombre %></h2>
-								<p><%= productos[index].description %></p>
-								<p>Comentarios: <%= productos[index].comentarios.length %></p>
-							</article>
-						</a>
-					</section>
-				</div>
+						<figure class="product-box_image">
+							<img src="<%= lista2[i].imagen %>" alt="<%= lista2[i].nameProducto %>">
+						</figure>
+						<article class="product-box_data">
+							<h2>
+								<a href="producto/detalle/id/<%=lista2[i].id%>">
+								<%= lista2[i].nameProducto 
+								</a>
+							</h2>
+							<p> 
+								<%= lista2[i].descProducto %> 
+							</p>
+							<h5> 
+								<a href="/profile/<%=lista[i].usuario.username%>">
+								<%= lista2[i].usuario.username %>
+								</a> 
+							</h5>
+						</article>
+					</section> 
+					</div>
+			     
 			<% } %>
+				
+			</section>
+			
 		</div>
 	</div>
 	<!-- /Más comentados -->
