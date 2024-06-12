@@ -39,13 +39,16 @@ const userController = {
 
 
     loginInfo: function (req,res, next){
+     // TRAIGO DEL FORM LA DATA Y LO GUARDO EN SESSION
         let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
         req.session.Usuario = nombreUsuario; // ahí lo guardé en sesión. Le puse 'Usuario', pero podría haber usado otro nombre.
         let pass = req.body.contrasenia;
-        req.session.pass = pass; //guardado en session
+        req.session.pass = pass; 
         let recordarme = req.body.recordarme;
-        req.session.guardar = recordarme; //guardado en session
-
+        req.session.guardar = recordarme; 
+     
+        
+        // los errores que traigo de la validación, parte almacenada en ruta
         let errors = validationUser(req);
 
         if (errors.isEmpty ()){
@@ -77,28 +80,8 @@ const userController = {
 
         } else {
             return res.render ('login', {errors: errors.mapped()})
-        }
-        //buscar el usuario
-        //consigo la passEncriptada
-        //en el formulario --> req.body nombre del input --> lo que escribio el usuario 
-        //comparo a ver si existe \ escribió cualq cosa
-
-
-        
-        // .then(resultado => {
-        //     if (req.session.Usuario){
-        //         return res.redirect('/')}
-        //     else{
-        //         return res.render('login', {title: 'login', usuario: data.usuario});
-        // } } ) 
-        // --> cambiarlo para que: encuentre el mail y vea si existe el usuario o no. Si existe el usuario, que vea si la contraseña es correcta o no. 
-        // para que verifique que la pass sea la correcta:
-        // let check= bcrypt.compareSync(contrasenia, contra)
-
-       
-        
-
-    },
+            // si encuentra errores, le aparecen los mensajes
+        } },
             
  
 
