@@ -4,7 +4,7 @@
 <%- include('./partials/head') %>
 
 <body>
-	<!-- Header -->
+	<!-- Header  dependiendo si se logueo o no-->
 	<%-  if (locals.user != undefined){%>
 		<%- include('./partials/headerLogueado')<%} else {%>
 			<%- include('./partials/header')%> 
@@ -24,7 +24,7 @@
 					<div>
 						
 						<label for = ""> Usuario: </label> <br><br> 
-						<input type="email" name="mail" value=""><br><br>
+						<input type="email" name="email" value=""><br><br>
 		
 					</div>
 		
@@ -32,7 +32,7 @@
 					<div> 
 						
 						<label for="Pass">contraseña:</label> <br><br>
-						<input type="password" id="Pass" name= contraseña value="">  <br><br>
+						<input type="password" id="Pass" name= contrasenia value="">  <br><br>
 					</div>
 		
 					<div> 
@@ -46,6 +46,13 @@
 		
 				</form>
 			</h2>
+			<!-- <p> errores: </p> -->
+			 <!--  <% if (locals.errors && errors.email){ %> -->
+			 <!-- <p> <%= errors.email.msg %> </p>  -->
+			  <!--  <% } %>  -->
+			 <!-- <% if (locals.errors && errors.contrasenia){ %>  -->
+			 <!--  <p> <%= errors.contrasenia.msg %> </p>  -->
+			 <!-- <% } %>   -->
 
 
 	<!-- footer -->

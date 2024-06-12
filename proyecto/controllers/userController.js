@@ -1,11 +1,13 @@
 const db =require('../database/models');
 const bcrypt= require('bcryptjs')
+
+let {validationUser} = require('express-validator')
 //falta la parte de conectar la base de datos + vista indicada.
 // EL ALIAS DEL MODELO ES 'Usuario'
 
 const userController = {
     register : function(req,res){
-        if (req.session.Usuario){
+        if (req.session.usuarioLogueado){
             return res.redirect('/users/login')} //si ya está registrado, andá a login. 
         else{
             return res.render('register', {title: 'Registrate', usuario: data.usuario});
@@ -16,7 +18,7 @@ const userController = {
         db.Usuario.create({
             email: req.body.email,
             id_user: req.body.user,
-            contra: bcrypt.hashSync(req.body.contrasenia,10), // passw encriptada + sincronizada c/session 
+            contra: bcrypt.hashSync(req.body.contrasenia,10), // passw encriptada + sincronizada c/el formulario
             fecha: req.body.fecha,
             dni: req.body.documento,
             profilePic: req.body.fotoPerfil
@@ -29,7 +31,7 @@ const userController = {
 
 
     login : function (req,res){
-            if (req.session.Usuario){
+            if (req.session.usuarioLogueado){
                 return res.redirect('/')}
             else{
                 return res.render('login', {title: 'login', usuario: data.usuario});
@@ -37,9 +39,44 @@ const userController = {
 
 
     loginInfo: function (req,res, next){
-        let { email, contraseña, recordarme } = req.body
+        let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
+        req.session.Usuario = nombreUsuario; // ahí lo guardé en sesión. Le puse 'Usuario', pero podría haber usado otro nombre.
+        let pass = req.body.contrasenia;
+        req.session.pass = pass; //guardado en session
+        let recordarme = req.body.recordarme;
+        req.session.guardar = recordarme; //guardado en session
 
-        db.Usuario.findOne( {where: [{email: email  }]})
+        let errors = validationUser(req);
+
+        if (errors.isEmpty ()){
+            db.Usuario.findOne({
+                where: [{email: nombreUsuario }]
+            })
+            .then(function(usuarioEncontrado){
+                //ponerlos en session.
+                req.session.user = {
+                    email: usuarioEncontrado.email,
+                    passWord: usuarioEncontrado.pass
+                }//si lo guardo para recordarlo
+                if (recordarme != undefined){
+                    res.cookie('Usuario', nombreUsuario, {maxAge: 1000*60*5}),
+                    res.cookie('Pass', pass, {maxAge: 1000*60*5})
+                }
+                return res.redirect('/');
+            }).catch (function(e){
+                console.log(e);
+            })
+
+        } else {
+            return res.render ('login', {errors: errors.mapped()})
+        }
+        //buscar el usuario
+        //consigo la passEncriptada
+        //en el formulario --> req.body nombre del input --> lo que escribio el usuario 
+        //comparo a ver si existe \ escribió cualq cosa
+
+
+        
         // .then(resultado => {
         //     if (req.session.Usuario){
         //         return res.redirect('/')}
@@ -47,13 +84,15 @@ const userController = {
         //         return res.render('login', {title: 'login', usuario: data.usuario});
         // } } ) 
         // --> cambiarlo para que: encuentre el mail y vea si existe el usuario o no. Si existe el usuario, que vea si la contraseña es correcta o no. 
+        // para que verifique que la pass sea la correcta:
+        // let check= bcrypt.compareSync(contrasenia, contra)
+
+       
+        
 
     },
-    // 
-    //     //para esto ver video cookies
-    //     //usa el findbyPk --> En routs, se tiene que poner le id
-            //             router.post('/:id, userController.loginInfo) =>         
-    //
+            
+ 
 
     profile: function(req,res){
         res.render ('profile',{title: 'Profile', data: data});

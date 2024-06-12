@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+let {body} =require('express-validator');
 
 const indexController = require("../controllers/indexController");
 

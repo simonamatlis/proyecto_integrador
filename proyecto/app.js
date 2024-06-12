@@ -30,10 +30,10 @@ app.use(session({
 				saveUninitialized: true }
 ));
 
-//Para pasar info de session a una vista
+//Para pasar info de session a una vista --> si abre una session, pasa el req al res 
 app.use(function(req, res, next) {
-  if (req.session.user !== undefined) {
-    res.locals.user = req.session.user;
+  if (req.session.usuarioLogueado != undefined) {
+    res.locals.user = req.session.usuarioLogueado;
   }
   return next();
 });

@@ -3,9 +3,13 @@
 <!-- Include Head -->
 <%-include('./partials/head', {title: title}) %>
 <body>
-	<!-- Header -->
-	<%-include('./partials/headerLogueado' , {userName: data.usuario.userName}) %>
+	<!-- Header  dependiendo si se logueo o no-->
+	<%-  if (locals.user != undefined){%>
+		<%- include('./partials/headerLogueado')<%} else {%>
+			<%- include('./partials/header')%> 
+			<% } %>
 	<!-- /Header -->
+	
 
 	<!-- Datos del usuario -->
 	<section class="info-usuario container products-wrapper">
