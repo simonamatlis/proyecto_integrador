@@ -18,7 +18,7 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title"> Edita tu perfil</h2>
+				<h2 class="products-title"> Crea tu perfil</h2>
 			</div>
 			
 			
@@ -28,7 +28,7 @@
 				<div>
 					
 					<label for = "email"> Email: </label>
-					<input type="email" name="mail" value="">  <br><br>
+					<input type="email" name="mail" value="<%= locals.old && old.email ? old.email : '' %>">  <br><br>
 
 				</div>
 
@@ -36,7 +36,7 @@
 				<div>
 					
 					<label for = "user"> Nombre Usuario: </label>
-					<input type="text" name="user" value=""> <br><br>
+					<input type="text" name="user" value="<%= locals.old && old.user ? old.user : '' %>"> <br><br>
 
 				</div>
 
@@ -70,6 +70,18 @@
 
 
 			</form> 
+			
+
+			<p> Cuidado!: </p> 
+			<% if (locals.errors && errors.email){ %> 
+				<p> <%= errors.email.msg %> </p>  
+			<% } %>  
+			<% if (locals.errors && errors.contrasenia){ %>
+				<p> <%= errors.contrasenia.msg %> </p>  
+			<% } %> 
+			<% if (locals.errors && errors.user){ %>
+				<p> <%= errors.user.msg %> </p>  
+			<% } %> 
 		
 		
 		</div>

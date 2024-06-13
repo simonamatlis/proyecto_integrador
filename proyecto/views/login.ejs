@@ -24,7 +24,7 @@
 					<div>
 						
 						<label for = ""> Usuario: </label> <br><br> 
-						<input type="email" name="email" value=""><br><br>
+						<input type="email" name="email" value="<%= locals.old && old.email ? old.email : '' %>"><br><br>
 		
 					</div>
 		
@@ -46,7 +46,7 @@
 		
 				</form>
 			</h2>
-			<p> errores: </p> 
+			<p> Cuidado!: </p> <!-- errores en vista-->
 			<% if (locals.errors && errors.email){ %> 
 				<p> <%= errors.email.msg %> </p>  
 			<% } %>  

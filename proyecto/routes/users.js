@@ -50,9 +50,27 @@ let userValidations = [
         })
 ]
 
+// validaciones del register
+let registerValidations = [
+    body('mail')
+        .notEmpty().withMessage('Por favor complete el campo con su correo.')
+        .isEmail().withMessage('Por favor ingrese un mail válido'),
+
+
+    body ('user').notEmpty().withMessage('Por favor complete el campo con su nombre.'),
+    
+    body('contrasenia')
+        .withMessage('Por favor complete el campo con una contraseña')
+        .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.'),
+    
+
+
+]
+
+
 //hacer un let registerValidations, y modificarle la ruta correspondiente
 router.get('/register', userController.register);
-router.post ('/registerStore', userController.registerInfo);
+router.post ('/registerStore', registerValidations,  userController.registerInfo);
 
 router.get('/login', userController.login);
 router.post('/loginStore', userValidations, userController.loginInfo); 

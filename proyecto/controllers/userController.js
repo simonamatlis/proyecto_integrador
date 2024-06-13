@@ -2,7 +2,8 @@ const db =require('../database/models');
 const bcrypt= require('bcryptjs')
 
 let {validationUser} = require('express-validator')
-//falta la parte de conectar la base de datos + vista indicada.
+
+
 // EL ALIAS DEL MODELO ES 'Usuario'
 
 const userController = {
@@ -15,17 +16,23 @@ const userController = {
 
 
     registerInfo : function (req, res) {
-        db.Usuario.create({
-            email: req.body.email,
-            id_user: req.body.user,
-            contra: bcrypt.hashSync(req.body.contrasenia,10), // passw encriptada + sincronizada c/el formulario
-            fecha: req.body.fecha,
-            dni: req.body.documento,
-            profilePic: req.body.fotoPerfil
-        })
-        .then(function (result) { 
-            return res.redirect ('/')     
-        }).catch (error => console.log(error))
+       
+        let errors = validationUser(req);
+
+        if (errors.isEmpty()){
+            db.Usuario.create({
+                email: req.body.email,
+                id_user: req.body.user,
+                contra: bcrypt.hashSync(req.body.contrasenia,10), // passw encriptada + sincronizada c/el formulario
+                fecha: req.body.fecha,
+                dni: req.body.documento,
+                profilePic: req.body.fotoPerfil
+            }); res.redirect('/users/profile')
+        } else {
+            res.render('login', {
+                errors: errors.mapped(),
+                old: req.body});
+        }
         
     },
 
@@ -79,8 +86,12 @@ const userController = {
             })
 
         } else {
-            return res.render ('login', {errors: errors.mapped()})
+            return res.render ('login', {
+                errors: errors.mapped(),
+                old: req.body
+            })
             // si encuentra errores, le aparecen los mensajes
+            
         } },
             
  
@@ -89,16 +100,15 @@ const userController = {
         res.render ('profile',{title: 'Profile', data: data});
         
     },
+    // FALTA REVISAR EL EDIT Y LOGOUT DE USUARIO
     profileEdit: function (req,res){
         res.render('profile-edit',{title: 'Edit profile', usuario: data.usuario});
     },
     profileEditInfo: function(req,res) {
-        let profileForm = req.body;
-        db.Usuario.create(profileForm)
-        .then(function(result){  //en vez de result va profileForm?
-            return res.redirect ('/')
-        }).catch (error => console.log(error))
-        //lo redirecciona a la pag principal o la de profile?
+        // let profileForm = req.body;
+        //
+        
+
 
     }
 
