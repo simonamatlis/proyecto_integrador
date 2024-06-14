@@ -25,11 +25,11 @@ module.exports = function(sequelize, dataTypes) {
             type: dataTypes.INTEGER,
             allowNull: true
         },
-        profilePic:{ // NO LA TENEMOS EN SQL
+        profilePic:{ 
             type: dataTypes.STRING,
             allowNull: true
         },
-        updatedAt:{ // NO LA TENEMOS EN SQL
+        updatedAt:{ 
             type: dataTypes.DATE,
             
         },

@@ -14,7 +14,7 @@ let userValidations = [
         // valida que el mail esté en la base de datos:
         .custom( function(value) {
           return  db.User.findOne({
-                where: {email: value}
+                where: {email: req.body.email}
             })
             .then(function(user){
                 if (!user){
@@ -60,8 +60,8 @@ let registerValidations = [
     body ('user').notEmpty().withMessage('Por favor complete el campo con su nombre.'),
     
     body('contrasenia')
-        .withMessage('Por favor complete el campo con una contraseña')
-        .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.'),
+        .notEmpty().withMessage('Por favor complete el campo con una contraseña')
+        .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.')
     
 
 
