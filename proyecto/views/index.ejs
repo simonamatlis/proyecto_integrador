@@ -5,7 +5,7 @@
 
 <body>
 	<!-- Header -->
-	<% if(locals.user !=null){%>
+	<% if(locals.user != undefined) {%>
 		<%- include("./partials/headerLogueado") %>
 	<% } else { %>
 		<%- include('./partials/header') %>
@@ -31,13 +31,13 @@
 
 			<!-- Show the "ultimos" products -->
 			<section class="bloque">
-				<% for (let i = lista.length - 1; i >= lista.length - 4; i--) { %>
+				<% for (let i = lista.length - 1; i >= lista.length - 4 ; i--) { %>
                        <div class="col-12 col-sm-6 col-lg-3">
 						 <section class = "product-box">
 							   <figure class="product-box_image">
 								 <a href="/producto/detalle/id<%=lista[i].id %>" >
 								    <img src="<%= lista[i].imgProducto %>" alt="<%= lista[i].nameProducto %>">
-								 </a>
+					
 							   </figure>
 							   <article class="product-box_data">
 								<h2>
@@ -55,54 +55,14 @@
 									</a>
 								</h5>
 								</article>
-								
+							</a>
 						 </section>
 					   </div>
 			<%	} %>
-			</section>
-			<% for( let index = 0; index < 4; index++ ) { %>
-				<% if (productos[index]) { %>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/producto/productos">
-							<figure class="product-box_image">
-								<img src="<%= productos[index].imagen %>" alt="<%= productos[i].nombre %>" >
-							</figure>
-							<article class="product-box_data">
-								<h2> <%= productos[index].nombre %></h2>
-								<p><%= productos[index].description %></p>
-								<p>Comentarios: <%= productos[index].comentarios.length %></p>
-								<h5>
-									<a href="/profile/<%= productos[i].usuario.username %>">
-									<%= productos[i].usuario.username %>
-									</a>
-								</h5>
-							</article>
-						</a>
-					</section>
-				</div>
-			<% } %>
-		
-			<% for( let index = 5; index < 10; index++ ) { %>
-				<% if (productos[index]) { %>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/producto/productos">
-							<figure class="product-box_image">
-								<img src="<%= productos[index].imagen %>" alt="<%= productos[index].nombre %>" >   <!-- no lo está leyendo. Solucionar. -->
-							</figure>
-							<article class="product-box_data">
-								<h2> <%= productos[index].nombre %></h2>
-								<p><%= productos[index].description %></p>
-								<p>Comentarios: <%= productos[index].comentarios.length %></p>
-							</article>
-						</a>
-					</section>
-				</div>
-			<% } %>
-		<% } %>
 		</div>
 	</div>
+	</section>
+	
 
 	<!-- /Novedades -->
 	<!-- Más comentados -->
@@ -115,13 +75,13 @@
 
 			<section class="bloque"> 
 				<% for(let i = 3; >= 0; i--) { %>
-					<% if (lista2[i]) { %>
+			
 					<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
 						<figure class="product-box_image">
-							<a href="/producto/detalle/id<%= lista2[i].id %>" >
+							
 								<img src="<%= lista2[i].imagen %>" alt="<%= lista2[i].nameProducto %>">
-							</a>
+						
 							
 						</figure>
 						<article class="product-box_data">
@@ -139,15 +99,18 @@
 								</a> 
 							</h5>
 						</article>
-					</section> 
-					</div>
-			     <% } %>
+					</a>
+				</section> 
+			</div>
 			<% } %>
-				
-			</section>
 			
-		</div>
+				
+			
+			
 	</div>
+</div>
+</section>
+
 	<!-- /Más comentados -->
 
 

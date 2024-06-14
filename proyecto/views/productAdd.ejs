@@ -5,7 +5,12 @@
 
 <body>
 	<!-- Header -->
-	<%- include('./partials/headerLogueado') %>
+	<% if(locals.user != undefined) { %>
+		<%- include('./partials/headerLogueado') %>
+<% } else { %>
+	<%- include("./partials/header") %>
+<% } %>
+	
 	<!-- /Header -->
 
 	<!-- Novedades -->
@@ -22,25 +27,25 @@
 					<div>
 						
 						<label for = "imgProducto"> Imagen del producto: </label>
-						<input type="file" name="imgProducto" value=""> <br><br>
+						<input type="file" name="imgProducto" value="" placeholder="foto de producto"> <br><br>
 
 					</div>
 
 					<div>
 						
 						<label for = "nameProducto"> Nombre del producto: </label>
-						<input type="text" name="nameProducto" value=""><br><br>
+						<input type="text" name="nameProducto" value="" placeholder="nombre de producto"><br><br>
 
 					</div>
 
 					<div>
 						
 						<label for = "descProducto"> descripción del producto: </label>
-						<input type="text" name="descProducto" value=""> <br><br>
+						<input type="text" name="descProducto" value="" placeholder="descripcion de producto"> <br><br>
 
 					</div>
 
-					<button type="submit">Enviar datos</button>
+					<button type="submit">Agregar producto</button>
 
 
 
