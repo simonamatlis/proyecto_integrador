@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('./partials/head', {title: title}) %>
+
+<body>
+    <% if(locals.user != undefined) { %>
+           <%- include("./partials/headerLogueado") %>
+<% } else { %>
+    <%- include("./partials/header") %>
+<% } %>
+
+<div class="container products-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="products-title"> Editar productos</h2>
+        </div>
+
+        <form action="/products/modify/<%= random %>" method="POST" class="">
+        <label class="imagen">Imagen</label> 
+        <input type="text" name="imagenes" placeholder="foto de productos">
+
+        <input type="text" name="nombreproducto" placeholder="nombre producto">
+
+        <input type="text" name="descProducto" placeholder="Descripcion producto">
+
+        <button type="submit">Modificar producto</button>
+    </form>
+ 
+    <%- include("./partials/footer") %>
+</body>
+
+</html>

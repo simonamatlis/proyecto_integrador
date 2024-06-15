@@ -6,9 +6,10 @@
 <body>
 	<!-- Header  dependiendo si se logueo o no-->
 	<%-  if (locals.user != undefined){%>
-		<%- include('./partials/headerLogueado')<%} else {%>
-			<%- include('./partials/header')%> 
-			<% } %>
+		<%- include('./partials/headerLogueado') %> 
+<%} else { %>
+	<%- include('./partials/header')%> 
+<% } %>
 	<!-- /Header -->
 
 	<!-- Novedades -->
@@ -19,7 +20,10 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 			<h2 class="col-12"> <i> Welcome back!  <br><br>
-				<form action="/users/loginStore" method="POST">
+				<form action="/users/loginStore" method="POST" class="">
+					<% if(locals.errors){ %>
+                           <p class = "error"> <%= errors.message %> </p>
+					<% } %>
 
 					<div>
 						
