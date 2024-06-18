@@ -42,7 +42,7 @@
 							   <article class="product-box_data">
 								<h2>
 									<a href="/producto/detalle/id/<%=lista[i].id%>">
-									<%= lista[i].nameProducto
+									<%= lista[i].nameProducto %>
 									</a>
 								</h2>
 
@@ -50,7 +50,7 @@
 									<%= lista[i].descProducto %>
 								</p>
 								<h5>
-									<a href="/profile/<%=lista[i].usuario.username%>"> 
+									<a href="/profile/<%=lista[i].usuario.username %>"> 
 										<%= lista[i].usuario.username %>
 									</a>
 								</h5>
@@ -74,28 +74,28 @@
 			<!-- Show the "ultimos" products -->
 
 			<section class="bloque"> 
-				<% for(let i = 3; >= 0; i--) { %>
+				<% for(let i = productos.length - 1; i >= productos.length - 4; i--) { %>
 			
 					<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
 						<figure class="product-box_image">
 							
-								<img src="<%= lista2[i].imagen %>" alt="<%= lista2[i].nameProducto %>">
+								<img src="<%= productos2[i].imagen %>" alt="<%= productos2[i].nameProducto %>">
 						
 							
 						</figure>
 						<article class="product-box_data">
 							<h2>
-								<a href="producto/detalle/id/<%= lista2[i].id %>">
-								<%= lista2[i].nameProducto %>
+								<a href="producto/detalle/id/<%= productos2[i].id %>">
+								<%= productos2[i].nameProducto %>
 								</a>
 							</h2>
 							<p> 
-								<%= lista2[i].descProducto %> 
+								<%= productos2[i].descProducto %> 
 							</p>
 							<h5> 
-								<a href="/profile/<%= lista[i].usuario.username %>">
-								<%= lista2[i].usuario.username %>
+								<a href="/profile/<%= productos[i].usuario.username %>">
+								<%= productos2[i].usuario.username %>
 								</a> 
 							</h5>
 						</article>
