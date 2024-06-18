@@ -63,12 +63,37 @@ let registerValidations = [
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
         .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.')
     
+]
 
+let userEditValidation =[
+    body('email')
+    .notEmpty().withMessage('Por favor complete el campo con su correo.')
+    .isEmail().withMessage('Por favor ingrese un mail válido')
+    .custom( function(value) {
+      return  db.User.findOne({
+            where: {email: req.body.email}
+        })
+        .then(function(user){
+            if (!user){
+                return true;
 
+            }else{
+                throw new Error('El email ya se encuentra registrado')
+            }
+        })
+        
+    }),
+
+    body ('user').notEmpty().withMessage('Por favor complete el campo con su nombre.'),
+    
+    body('contrasenia')
+        .notEmpty().withMessage('Por favor complete el campo con una contraseña')
+        .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.')
+    
 ]
 
 
-//hacer un let registerValidations, y modificarle la ruta correspondiente
+//hacer una ruta logOut
 router.get('/register', userController.register);
 router.post ('/registerStore', registerValidations,  userController.registerInfo);
 
@@ -76,9 +101,10 @@ router.get('/login', userController.login);
 router.post('/loginStore', userValidations, userController.loginInfo); 
 
 
-router.get('/profile', userController.profile);
+router.get('/profile/:id', userController.profile);
 
 router.get('/edit', userController.profileEdit);
-router.get('/editStore', userController.profileEditInfo)
+router.post('/editStore',userEditValidation, userController.profileEditInfo)
+
 
 module.exports = router;

@@ -9,11 +9,10 @@ let {validationUser} = require('express-validator')
 const userController = {
     register : function(req,res){
         if (req.session.usuarioLogueado){
-            return res.redirect('/users/login')} //si ya está registrado, andá a login. 
+            return res.redirect('/users/profile' + req.session.usuarioLogueado.id)} //si ya está registrado, profile. 
         else{
             return res.render('register', {title: 'Registrate', usuario: data.usuario});
-    }}, // revisar tema de session y cookies para corregirlo. 
-
+    }}, 
 
     registerInfo : function (req, res) {
        
@@ -39,13 +38,13 @@ const userController = {
 
     login : function (req,res){
             if (req.session.usuarioLogueado){
-                return res.redirect('/')}
+                return res.redirect('/profile' + result.id)}
             else{
-                return res.render('login', {title: 'login', usuario: data.usuario});
+                return res.render('login', {title: 'login'});
     }},
 
 
-    loginInfo: function (req,res, next){
+    loginInfo: function (req,res){
      // TRAIGO DEL FORM LA DATA Y LO GUARDO EN SESSION
         let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
         req.session.Usuario = nombreUsuario; // ahí lo guardé en sesión. Le puse 'Usuario', pero podría haber usado otro nombre.
@@ -73,13 +72,13 @@ const userController = {
                         
                         //si lo guardo para recordarlo
                         if (recordarme != undefined){
-                            res.cookie('Usuario', nombreUsuario, {maxAge: 1000*60*5}),
-                            res.cookie('Pass', pass, {maxAge: 1000*60*5})
+                            res.cookie('Usuario', nombreUsuario.id, {maxAge: 1000*60*5})
+                            
                         }
 
                      }  
                 
-                }return res.redirect('/users/profile');
+                }return res.redirect('/users/profile' + nombreUsuario.id);
                 
             }).catch (function(e){
                 console.log(e);
@@ -95,14 +94,32 @@ const userController = {
         } },
             
  
-
+    // FALTA PROFILE
     profile: function(req,res){
+        db.
         res.render ('profile',{title: 'Profile', data: data});
         
     },
     // FALTA REVISAR EL EDIT Y LOGOUT DE USUARIO
     profileEdit: function (req,res){
-        res.render('profile-edit',{title: 'Edit profile', usuario: data.usuario});
+        let errors = validationUser(req);
+        if (errors.isEmpty()){if (req.session.usuarioLogueado){
+            let id = req.session.usuarioLogueado.id;
+
+            db.Usuario.finfByPk(id)
+            .then(function(usuario){
+                res.render('profile-edit',{title: 'Edit profile', usuario: data.usuario})
+             })
+            .catch(function(error){
+                console.log(error)
+            });
+       } }
+        else {
+            return res.render ('login', {
+                errors: errors.mapped(),
+                old: req.body
+            })
+       }
     },
     profileEditInfo: function(req,res) {
         // let profileForm = req.body;
@@ -110,6 +127,12 @@ const userController = {
         
 
 
+    },
+    logOut: function(req,res) {
+        req.session.destroy()
+        res.clearCookie(Usuario)
+        return res.redirect('/')
+        
     }
 
 
