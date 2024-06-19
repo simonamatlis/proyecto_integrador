@@ -21,7 +21,7 @@ const userController = {
         if (errors.isEmpty()){
             db.Usuario.create({
                 email: req.body.email,
-                id_user: req.body.user,
+                user: req.body.usuario,
                 contra: bcrypt.hashSync(req.body.contrasenia,10), // passw encriptada + sincronizada c/el formulario
                 fecha: req.body.fecha,
                 dni: req.body.documento,
@@ -94,36 +94,24 @@ const userController = {
         } },
             
  
-    // FALTA PROFILE
+    // FALTA VIEW PROFILE --> parte producto. 
     profile: function(req,res){
         //params porq es id. 
         let id = req.params.id;
         //para que aparezcan los productos /comentarios de forma ordenada
         let modelos = {
             include:[{association: 'producto'},
-            {association: 'comentarios'} ],
+                      {association: 'comentarios' }],
             order: [{model: db.Producto, as: 'producto'}, 'createdAt', 'DESC']
         }
 
         db.Usuario.findByPk(id, modelos)
         .then(function(usuario){
-            if ( req.session.usuarioLogueado != undefined && req.session.usuarioLogueado.id == usuario.id){
-                return res.render('profile', {
-                    title: `${usuario.mail}`,
-                    usuario: usuario,
-                    productos: usuario.producto,
-                    comentarios: usuario.comentarios.length
-             } )
-                
-            } else {
-                return res.status(404).send("Usuario no encontrado");
-                
-            }
+            if ( req.session.usuarioLogueado && req.session.usuarioLogueado.id == results.id)
+            return res.render('profile', {title: `${usuario.email}`, usuario: usuario, productos: usuario.producto, comentarios: usuario.comentarios.legth});
         }. catch(function(error){
             console.log(error)
-        })
-
-        )
+        }))
     },
     // FALTA REVISAR TODO EL EDIT 
     profileEdit: function (req,res){
@@ -133,8 +121,13 @@ const userController = {
 
             db.Usuario.finfByPk(id)
             .then(function(usuario){
-                res.render('profile-edit',{title: 'Edit profile', usuario: data.usuario})
-             })
+                if(usuario) {
+                res.render('profile-edit',{title: 'Edit profile', usuario: usuario});
+                } 
+                //else{
+                //    return function(error){
+                //    console.log(error)}}
+                })
             .catch(function(error){
                 console.log(error)
             });
@@ -147,6 +140,22 @@ const userController = {
         let errors = validationUser(req);
 
         if (errors.isEmpty()){
+            if (req.session.usuarioLogueado) {
+                let id = req.session.usuarioLogueado.id;
+
+                let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
+                req.session.Usuario = nombreUsuario; // ahí lo guardé en sesión. Le puse 'Usuario', pero podría haber usado otro nombre.
+                let pass = req.body.contrasenia;
+                req.session.pass = pass; 
+                let recordarme = req.body.recordarme;
+                req.session.guardar = recordarme;
+
+            db.Usuario.findByPk(id)
+            // preguntar como meter el update en la base de datos --> .then( función )
+            }
+            
+            
+
 
         }
 
