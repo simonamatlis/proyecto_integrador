@@ -96,14 +96,39 @@ const userController = {
  
     // FALTA PROFILE
     profile: function(req,res){
-        db.
-        res.render ('profile',{title: 'Profile', data: data});
-        
+        //params porq es id. 
+        let id = req.params.id;
+        //para que aparezcan los productos /comentarios de forma ordenada
+        let modelos = {
+            include:[{association: 'producto'},
+            {association: 'comentarios'} ],
+            order: [{model: db.Producto, as: 'producto'}, 'createdAt', 'DESC']
+        }
+
+        db.Usuario.findByPk(id, modelos)
+        .then(function(usuario){
+            if ( req.session.usuarioLogueado != undefined && req.session.usuarioLogueado.id == usuario.id){
+                return res.render('profile', {
+                    title: `${usuario.mail}`,
+                    usuario: usuario,
+                    productos: usuario.producto,
+                    comentarios: usuario.comentarios.length
+             } )
+                
+            } else {
+                return res.status(404).send("Usuario no encontrado");
+                
+            }
+        }. catch(function(error){
+            console.log(error)
+        })
+
+        )
     },
-    // FALTA REVISAR EL EDIT Y LOGOUT DE USUARIO
+    // FALTA REVISAR TODO EL EDIT 
     profileEdit: function (req,res){
-        let errors = validationUser(req);
-        if (errors.isEmpty()){if (req.session.usuarioLogueado){
+        
+        if (req.session.usuarioLogueado){
             let id = req.session.usuarioLogueado.id;
 
             db.Usuario.finfByPk(id)
@@ -113,18 +138,19 @@ const userController = {
             .catch(function(error){
                 console.log(error)
             });
-       } }
-        else {
-            return res.render ('login', {
-                errors: errors.mapped(),
-                old: req.body
-            })
+       }else {
+            return res.redirect('/login')
        }
+       
     },
     profileEditInfo: function(req,res) {
-        // let profileForm = req.body;
-        //
-        
+        let errors = validationUser(req);
+
+        if (errors.isEmpty()){
+
+        }
+
+       
 
 
     },
