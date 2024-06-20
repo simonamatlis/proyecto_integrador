@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<%- include('./partials/head', {title: title}) %>
+<%- include('./partials/head') %>
 
 <body>
     <% if(locals.user != undefined) { %>
@@ -16,7 +16,7 @@
             <h2 class="products-title"> Editar productos</h2>
         </div>
 
-        <form action="/products/modify/<%= random %>" method="POST" class="">
+        <form action="/products/productEdit/<%= random %>" method="POST" class="">
         <label class="imagen">Imagen</label> 
         <input type="text" name="imagenes" placeholder="foto de productos">
 

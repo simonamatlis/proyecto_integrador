@@ -10,5 +10,8 @@ router.get("/productos", productController.product)
 router.get('/agregar', productController.newProduct )
 router.post('/agregarUpdated', productController.guardaInfo );
 
+router.post("/agregar", productController.productAdd);
+router.post("/agregarUpdated", productController.edit_product)
+
 
 module.exports = router;
