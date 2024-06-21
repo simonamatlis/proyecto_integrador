@@ -3,11 +3,13 @@ USE proyectoInt2;
 
 --  TABLA DE USUARIOS--
 CREATE TABLE usuario (
-id_usuario INT UNSIGNED PRIMARY KEY AUTO_INCREMENT, 
+id_usuario INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+usuario TEXT NOT NULL, 
 email TEXT NOT NULL,
 contra TEXT NOT NULL,
 fecha DATE NOT NULL,
 dni INT NOT NULL,
+updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 deletedAt  TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP 
 );
@@ -39,20 +41,20 @@ FOREIGN KEY (producto_id) REFERENCES productos(id_producto)
 );
 
 --  VALUES DE LOS 5 USUARIOS --
-INSERT INTO usuario (id_usuario,email,contra,fecha, dni,createdAt,deletedAt)
-VALUES(default, 'luciana@gmail.com', 'luCHi', '2024-04-08', 45891234,null, null);
+INSERT INTO usuario (id_usuario, usuario, email,contra,fecha, dni,createdAt,deletedAt)
+VALUES(default, 'Luciana','luciana@gmail.com', 'luCHi', '2024-04-08', 45891234,null, null);
 
 INSERT INTO usuario
-VALUES(default, 'juana@gmail.com', 'Juana', '2024-03-08', 46791334,null, null);
+VALUES(default, 'Juana', 'juana@gmail.com', 'Juana', '2024-03-08', 46791334,null, null);
 
 INSERT INTO usuario
-VALUES(default, 'lara@gmail.com', 'lara', '2024-03-10', 42450334,null, null);
+VALUES(default, 'Lara','lara@gmail.com', 'lara', '2024-03-10', 42450334,null, null);
 
 INSERT INTO usuario
-VALUES(default, 'matias@gmail.com', 'Matias', '2024-02-25', 46707834,null, null);
+VALUES(default, 'Matias', 'matias@gmail.com', 'Matias', '2024-02-25', 46707834,null, null);
 
 INSERT INTO usuario
-VALUES(default, 'ana@gmail.com', 'ana', '2024-04-03', 42791344,null, null);
+VALUES(default, 'Ana', 'ana@gmail.com', 'ana', '2024-04-03', 42791344,null, null);
 
 
 

@@ -26,15 +26,17 @@ const userController = {
                 fecha: req.body.fecha,
                 dni: req.body.documento,
                 profilePic: req.body.fotoPerfil
-            }); res.redirect('/users/profile')
-        } else {
-            res.render('login', {
-                errors: errors.mapped(),
-                old: req.body});
-        }
-        
-    },
+            })
+            .then(function(result){
+                return res.redirect('/users/profile')
+            })
+            .catch(function(e){
+                console.log(e)});
 
+         } else { res.render('register', { title: 'Registrate',
+            errors: errors.mapped(),
+            old: req.body});}
+    },
 
     login : function (req,res){
             if (req.session.usuarioLogueado){
@@ -43,13 +45,14 @@ const userController = {
                 return res.render('login', {title: 'login'});
     }},
 
-
     loginInfo: function (req,res){
      // TRAIGO DEL FORM LA DATA Y LO GUARDO EN SESSION
         let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
         req.session.Usuario = nombreUsuario; // ahí lo guardé en sesión. Le puse 'Usuario', pero podría haber usado otro nombre.
+        
         let pass = req.body.contrasenia;
         req.session.pass = pass; 
+        
         let recordarme = req.body.recordarme;
         req.session.guardar = recordarme; 
      
@@ -93,7 +96,6 @@ const userController = {
             
         } },
             
- 
     // FALTA VIEW PROFILE --> parte producto. 
     profile: function(req,res){
         //params porq es id. 
@@ -109,9 +111,9 @@ const userController = {
         .then(function(usuario){
             if ( req.session.usuarioLogueado && req.session.usuarioLogueado.id == results.id)
             return res.render('profile', {title: `${usuario.email}`, usuario: usuario, productos: usuario.producto, comentarios: usuario.comentarios.legth});
-        }. catch(function(error){
+        }). catch(function(error){
             console.log(error)
-        }))
+        })
     },
     // FALTA REVISAR TODO EL EDIT 
     profileEdit: function (req,res){
@@ -124,9 +126,9 @@ const userController = {
                 if(usuario) {
                 res.render('profile-edit',{title: 'Edit profile', usuario: usuario});
                 } 
-                //else{
-                //    return function(error){
-                //    console.log(error)}}
+                else{
+                   return function(error){
+                   console.log(error)}}
                 })
             .catch(function(error){
                 console.log(error)
@@ -140,29 +142,57 @@ const userController = {
         let errors = validationUser(req);
 
         if (errors.isEmpty()){
-            if (req.session.usuarioLogueado) {
-                let id = req.session.usuarioLogueado.id;
 
-                let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
-                req.session.Usuario = nombreUsuario; // ahí lo guardé en sesión. Le puse 'Usuario', pero podría haber usado otro nombre.
-                let pass = req.body.contrasenia;
-                req.session.pass = pass; 
-                let recordarme = req.body.recordarme;
-                req.session.guardar = recordarme;
+            let viejo= {
+                    emailUser:  req.body.email,
+                    nombreUser: req.body.usuario,
+                    contraUser: bcrypt.hashSync(req.body.contrasenia,10),
+                    fechaUser : req.body.fecha,
+                    dniUser: req.body.documento,
+                    profilePicUser: req.body.fotoPerfil
+                }  
+                db.Usuario.update(viejo, {where:{id: req.session.usuarioLogueado.id}})
+                .then(function(result)
+                {
+                    req.session.usuarioLogueado.emailUser = req.body.email; 
+                
+                    req.session.usuarioLogueado.nombreUser = req.body.usuario;
+                    
+                    req.session.usuarioLogueado.contraUser = bcrypt.hashSync(req.body.contrasenia,10);
+                    
+                    req.session.usuarioLogueado.fechaUser= req.body.fecha;
+                    
+                    req.session.usuarioLogueado.dniUser= req.body.documento;
+                    
+                    req.session.usuarioL.profilePicUser = req.body.fotoPerfil
 
-            db.Usuario.findByPk(id)
-            // preguntar como meter el update en la base de datos --> .then( función )
+                    res.locals.usuarioLogueado = req.session.usuarioLogueado
+
+                    return res.redirect('/profile' + req.session.usuarioLogueado.id);
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+        }else {
+
+                    db.Usuario.findByPk(req.session.usuarioLogueado.id)
+                    .then(function(usuario){
+                        return res.render('profile-edit', {title: 'Edita tu perfil', errors: errors.mapped()
+                    , old: req.body, usuario: usuario })
+                    })
+                    .catch(function(error){
+                        console.log(error)
+                    });
+
+                    // if (req.session.usuarioLogueado) {
+                    //let id = req.session.usuarioLogueado.id;
+
+
+
             }
-            
-            
-
-
-        }
-
-       
-
-
+   
     },
+
     logOut: function(req,res) {
         req.session.destroy()
         res.clearCookie(Usuario)
