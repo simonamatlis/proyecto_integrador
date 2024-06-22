@@ -30,38 +30,39 @@
 
 
 			<!-- Show the "ultimos" products -->
-			<section class="bloque">
-				<% for (let i = title.length - 1; i >= title.length - 4 ; i--) { %>
-                       <div class="col-12 col-sm-6 col-lg-3">
-						 <section class = "product-box">
-							   <figure class="product-box_image">
-								 <a href="/producto/detalle/id<%=title[i].id %>" >
-								    <img src="<%= title[i].imgProducto %>" alt="<%= title[i].nameProducto %>">
-					
-							   </figure>
-							   <article class="product-box_data">
-								<h2>
-									<a href="/producto/detalle/id/<%=title[i].id%>">
-									<%= title[i].nameProducto %>
-									</a>
-								</h2>
-
-								<p> 
-									<%= title[i].descProducto %>
-								</p>
-								<h5>
-									<a href="/profile/<%= //title[i].usuario.username %>"> 
-										<%= //title[i].usuario.username %>
-									</a>
-								</h5>
-								</article>
-							</a>
-						 </section>
-					   </div>
-			<%	} %>
+			
+				<% for(let i = 0 ; i < productos.length ; i++) { %>
+			
+					<div class="col-12 col-sm-6 col-lg-3">
+					<section class="product-box">
+						<figure class="product-box_image">
+							
+								<img src="<%= productos[i].nombre_imagen %>" alt="<%= productos[i].nombre_producto %>">
+						
+							
+						</figure>
+						<article class="product-box_data">
+							<h2>
+								<a href="producto/productos/<%= productos[i].id_producto %>">
+								<%= productos[i].nombre_producto %>
+								</a>
+							</h2>
+							<p> 
+								<%= productos[i].descripcion_producto %> 
+							</p>
+							<h5> 
+								<a href="users/profile/<%= productos[i].user_id %>">
+								<%= productos[i].usuario.usuario %>
+								</a> 
+							</h5>
+						</article>
+					</a>
+				</section> 
+			</div>
+			<% } %>
 		</div>
 	</div>
-	</section>
+	
 	
 
 	<!-- /Novedades -->
@@ -73,38 +74,7 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 
-			<section class="bloque"> 
-				<% for(let i = productos.length - 1; i >= productos.length - 4; i--) { %>
 			
-					<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<figure class="product-box_image">
-							
-								<img src="<%= productos[i].imagen %>" alt="<%= productos[i].nameProducto %>">
-						
-							
-						</figure>
-						<article class="product-box_data">
-							<h2>
-								<a href="producto/detalle/id/<%= //producto[i].id %>">
-								<%= // productos[i].nameProducto %>
-								</a>
-							</h2>
-							<p> 
-								<%= productos[i].descProducto %> 
-							</p>
-							<h5> 
-								<a href="/profile/<%= //db.producto[i].usuario.username %>">
-								<%= //productos[i].usuario.username %>
-								</a> 
-							</h5>
-						</article>
-					</a>
-				</section> 
-			</div>
-			<% } %>
-			
-				
 			
 			
 	</div>
