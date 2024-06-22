@@ -1,7 +1,8 @@
-const db =require('../database/models');
-const bcrypt= require('bcryptjs')
+const db = require('../database/models');
+const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
-let {validationUser} = require('express-validator')
+
 
 
 // EL ALIAS DEL MODELO ES 'Usuario'
@@ -39,62 +40,62 @@ const userController = {
     },
 
     login : function (req,res){
-            if (req.session.usuarioLogueado){
-                return res.redirect('/profile' + result.id)}
+            if (req.session.usuarioLogueado != undefined){
+                return res.redirect('/profile' + req.session.usuarioLogueado.id)}
             else{
                 return res.render('login', {title: 'login'});
     }},
 
     loginInfo: function (req,res){
-     // TRAIGO DEL FORM LA DATA Y LO GUARDO EN SESSION
-        let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
-        req.session.Usuario = nombreUsuario; // ahí lo guardé en sesión. Le puse 'Usuario', pero podría haber usado otro nombre.
-        
-        let pass = req.body.contrasenia;
-        req.session.pass = pass; 
-        
-        let recordarme = req.body.recordarme;
-        req.session.guardar = recordarme; 
-     
-        
-        // los errores que traigo de la validación, parte almacenada en ruta
-        let errors = validationUser(req);
 
-        if (errors.isEmpty ()){
-            db.Usuario.findOne({
-                where: [{email: nombreUsuario }]
-            })
-            .then(function(usuarioEncontrado){
-                if (usuarioEncontrado){
-                    // si puso bien la contra y existe:
-                    if ( bcrypt.compareSync(contrasenia, usuarioEncontrado.pass)) {
-                        //ponerlos en session.
-                        req.session.user = {
-                            email: usuarioEncontrado.email,
-                            passWord: usuarioEncontrado.pass}
-                        
-                        //si lo guardo para recordarlo
+        let errors = validationResult(req);
+        
+        // TRAIGO DEL FORM LA DATA Y LO GUARDO EN SESSION
+            let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
+            let pass = req.body.contrasenia;
+            req.session.pass = pass; 
+            
+            let recordarme = req.body.recordarme;
+            req.session.guardar = recordarme; 
+        
+            // los errores que traigo de la validación, parte almacenada en ruta
+            
+
+            if (errors.isEmpty ()){
+                db.Usuario.findOne({ where: [{email: nombreUsuario }]})
+                .then(function(usuarioEncontrado){
+                    if (usuarioEncontrado != null ){
+                        usuarioEncontrado = req.session.Usuario    // ahí lo guardé en sesión
                         if (recordarme != undefined){
-                            res.cookie('Usuario', nombreUsuario.id, {maxAge: 1000*60*5})
+                            res.cookie('Usuario', usuarioEncontrado.id, {maxAge: 1000*60*5})
                             
                         }
+                        return res.redirect('/users/profile' + usuarioEncontrado.id);
+                     } else {
+                        return res.redirect('/users/login');
+                         }
+                }).catch (function(e){
+                            console.log(e);
+                        });
+                        // // si puso bien la contra y existe:
+                        // if ( bcrypt.compareSync(contrasenia, usuarioEncontrado.pass)) {
+                        //     //ponerlos en session.
+                        //     req.session.user = {
+                        //         email: usuarioEncontrado.email,
+                        //         passWord: usuarioEncontrado.pass}
+                            
+                    
 
-                     }  
+                        // }  
+            } else {
+                res.render ('login', { title: 'Login',
+                    errors: errors.mapped(),
+                    old: req.body
+                })
+                // si encuentra errores, le aparecen los mensajes
                 
-                }return res.redirect('/users/profile' + nombreUsuario.id);
-                
-            }).catch (function(e){
-                console.log(e);
-            })
-
-        } else {
-            return res.render ('login', {
-                errors: errors.mapped(),
-                old: req.body
-            })
-            // si encuentra errores, le aparecen los mensajes
-            
-        } },
+            } 
+    },
             
     // FALTA VIEW PROFILE --> parte producto. 
     profile: function(req,res){

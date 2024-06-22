@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-let {body} =require('express-validator');
+const { body } = require('express-validator');
 let db = require('../database/models')
-const bcrypt= require('bcryptjs')
+const bcrypt = require('bcryptjs')
 
 const userController = require("../controllers/userController");
 
@@ -11,22 +11,20 @@ let userValidations = [
     body('email')
         .notEmpty().withMessage('Por favor complete el campo con su correo.')
         .isEmail().withMessage('Por favor ingrese un mail válido')
-        // valida que el mail esté en la base de datos:
-        .custom( function(value) {
+        .custom(function(value,{req}) {
           return  db.User.findOne({
                 where: {email: req.body.email}
             })
             .then(function(user){
-                if (!user){
+                if (user != undefined){
+                    return true
+                } else {
                     throw new Error('El email no se encuentra registrado')
-
                 }
             })
             
         }),
 
-
-    // encuentre el mail y vea si existe el usuario o no. Si existe el usuario, que vea si la contraseña es correcta o no. 
             
     body ('contrasenia')
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
@@ -48,7 +46,7 @@ let userValidations = [
                 }
             })
         })
-]
+];
 
 // validaciones del register
 let registerValidations = [
@@ -63,7 +61,7 @@ let registerValidations = [
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
         .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.')
     
-]
+];
 
 let userEditValidation =[
     body('email')
@@ -90,7 +88,7 @@ let userEditValidation =[
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
         .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.')
     
-]
+];
 
 
 //hacer una ruta logOut

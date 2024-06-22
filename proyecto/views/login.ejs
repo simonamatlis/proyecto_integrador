@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
-<%- include('./partials/head') %>
 
 <body>
 	<!-- Header  dependiendo si se logueo o no-->
-	<%-  if (locals.user != undefined){%>
+	<%  if (locals.user != undefined){%>
 		<%- include('./partials/headerLogueado') %> 
-<%} else { %>
-	<%- include('./partials/header')%> 
-<% } %>
+		<%} else { %>
+	    <%- include('./partials/header')%> 
+		<% } 
+	%>
 	<!-- /Header -->
 
 	<!-- Novedades -->
@@ -50,12 +49,13 @@
 		
 				</form>
 			</h2>
-			<p> Cuidado!: </p> <!-- errores en vista-->
+		
+			 <!-- errores en vista-->
 			<% if (locals.errors && errors.email){ %> 
-				<p> <%= errors.email.msg %> </p>  
+				<p> Cuidado!: <%= errors.email.msg %> </p>  
 			<% } %>  
 			<% if (locals.errors && errors.contrasenia){ %>
-				<p> <%= errors.contrasenia.msg %> </p>  
+				<p> Cuidado!: <%= errors.contrasenia.msg %> </p>  
 			<% } %>  
 
 
