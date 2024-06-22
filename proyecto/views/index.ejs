@@ -50,8 +50,8 @@
 									<%= title[i].descProducto %>
 								</p>
 								<h5>
-									<a href="/profile/<%= //title[i].usuario.userName %>"> 
-										<%= //title[i].usuario.userName %>
+									<a href="/profile/<%= //title[i].usuario.username %>"> 
+										<%= //title[i].usuario.username %>
 									</a>
 								</h5>
 								</article>
@@ -80,22 +80,22 @@
 					<section class="product-box">
 						<figure class="product-box_image">
 							
-								<img src="<%= productos[i].imagen %>" alt="<%= productos[i].nameProducto %>">
+								<img src="<%= productos[i].nombre_imagen %>" alt="<%= productos[i].nombre_producto %>">
 						
 							
 						</figure>
 						<article class="product-box_data">
 							<h2>
-								<a href="producto/detalle/id/<%= //producto[i].id %>">
-								<%= // productos[i].nameProducto %>
+								<a href="producto/productos/<%= productos[i].id_producto %>">
+								<%= productos[i].nombre_producto %>
 								</a>
 							</h2>
 							<p> 
-								<%= productos[i].descProducto %> 
+								<%= productos[i].descripcion_producto %> 
 							</p>
 							<h5> 
-								<a href="/profile/<%= //db.producto[i].usuario.username %>">
-								<%= //productos[i].usuario.username %>
+								<a href="users/profile/<%= productos[i].user_id %>">
+								<%= productos[i].usuario.usuario %>
 								</a> 
 							</h5>
 						</article>
@@ -103,8 +103,21 @@
 				</section> 
 			</div>
 			<% } %>
+		</div>
+	</div>
+	
+	
+
+	<!-- /Novedades -->
+	<!-- Más comentados -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Más comentados</h2>
+			</div>
+			<!-- Show the "ultimos" products -->
+
 			
-				
 			
 			
 	</div>

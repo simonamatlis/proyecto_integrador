@@ -6,7 +6,8 @@
 -- Generation Time: Jun 22, 2024 at 12:06 PM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.33
-
+CREATE SCHEMA proyectoInt2; 
+USE proyectoInt2;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -94,17 +95,17 @@ CREATE TABLE `productos` (
 -- Dumping data for table `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `user_id`, `nombre_imagen`, `nombre_producto`, `descripcion_producto`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 1, 'images/products/remera.png', 'remera', 'Remera escote recto y hombros semicubiertos.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(2, 2, 'pantalón', 'images/products/pantalon.png', 'Pantalón de tiro alto y cintura con trabillas. Pierna recta. ', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(3, 3, 'jean', 'images/products/jean.png', 'Jean Slim Fit - Skinny Leg - Tiro Alto', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(4, 4, 'top', 'images/products/top.png', 'Top corto de escote pico cruzado y manga sisa.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(5, 5, 'campera', 'images/products/campera.png', 'Cazadora corta de cuello solapa con manga larga', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(6, 1, 'vestido', 'images/products/vestido.png', 'Vestido corto de escote recto y hombros descubiertos.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(7, 2, 'zapatos', 'images/products/zapatos.png', 'Zapato destalonado de tacón kitten. Tira trasera con cierre mediante hebilla. Acabado en punta.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(8, 3, 'pollera', 'images/products/pollera.png', 'Falda pantalón de tiro alto.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(9, 4, 'blazer', 'images/products/blazer.png', 'Blazer abierta de cuello y solapa con manga larga acabada en vuelta y hombreras.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
-(10, 5, 'mono', 'images/products/mono.png', 'Mono largo de cuello redondo con manga sisa y manga corta. ', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL);
+INSERT INTO `productos` (`id_producto`, `user_id`, `nombre_producto`, `nombre_imagen`, `descripcion_producto`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
+(1, 1, 'remera','images/products/remera.jpeg', 'Remera escote recto y hombros semicubiertos.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(2, 2, 'pantalón', 'images/products/pantalon.jpeg', 'Pantalón de tiro alto y cintura con trabillas. Pierna recta. ', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(3, 3, 'jean', 'images/products/jean.jpeg', 'Jean Slim Fit - Skinny Leg - Tiro Alto', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(4, 4, 'top', 'images/products/top.jpeg', 'Top corto de escote pico cruzado y manga sisa.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(5, 5, 'campera', 'images/products/campera.jpeg', 'Cazadora corta de cuello solapa con manga larga', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(6, 1, 'vestido', 'images/products/vestido.jpeg', 'Vestido corto de escote recto y hombros descubiertos.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(7, 2, 'zapatos', 'images/products/zapatos.jpeg', 'Zapato destalonado de tacón kitten. Tira trasera con cierre mediante hebilla. Acabado en punta.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(8, 3, 'pollera', 'images/products/pollera.jpeg', 'Falda pantalón de tiro alto.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(9, 4, 'blazer', 'images/products/blazer.jpeg', 'Blazer abierta de cuello y solapa con manga larga acabada en vuelta y hombreras.', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL),
+(10, 5, 'mono', 'images/products/mono.jpeg', 'Mono largo de cuello redondo con manga sisa y manga corta. ', '2024-06-20 23:21:55', '2024-06-20 23:21:55', NULL);
 
 -- --------------------------------------------------------
 
