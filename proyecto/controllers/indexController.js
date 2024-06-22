@@ -5,7 +5,7 @@ const indexController = {
       db.Producto.findAll({include: [ { association: "usuario"}]})
 
       .then(function (result) {
-        return res.render("index",{title: 'Sara', productos: productos} )
+        return res.render("index",{title: 'Sara', productos: result} )
       },)
       
       .catch(function (error) {

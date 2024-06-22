@@ -51,7 +51,7 @@ module.exports = function(sequelize, dataTypes) {
     let config= {
         tableName: 'usuario',
         timestamps: true, 
-        underscored: true
+       // underscored: true
     };
     
 
@@ -59,12 +59,12 @@ module.exports = function(sequelize, dataTypes) {
 
     Usuario.associate = function(models){
         Usuario.hasMany(models.Producto, {
-            as: "producto",
-            foreignkey: "user_id"
+            as: "productos",
+            foreignKey: "user_id"
         });
         Usuario.hasMany(models.Comentarios,{
             as: 'comentarios', 
-            foreignkey: 'user_id'
+            foreignKey: 'user_id'
         })
     }
 
