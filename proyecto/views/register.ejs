@@ -62,7 +62,7 @@
 				<div> 
 					
 					<label for="profilepic" class="form-label"> Foto de perfil: </label>
-					<input class="form-input" type="text" id="profilepic" name="profilepic" value="<%= locals.old && old.user ? old.user : '' %>"> <br><br>
+					<input class="form-input" type="text" id="profilePic" name="profilePic" value="<%= locals.old && old.user ? old.user : '' %>"> <br><br>
 				</div>
 				
 				<button class=" form" type="submit">Enviar datos</button>
@@ -75,8 +75,8 @@
 			<% if (locals.errors && errors.email){ %> 
 				<p> Cuidado!: <%= errors.email.msg %> </p>  
 			<% } %>  
-			<% if (locals.errors && errors.contrasenia){ %>
-				<p> Cuidado!: <%= errors.contrasenia.msg %> </p>  
+			<% if (locals.errors && errors.contra){ %>
+				<p> Cuidado!: <%= errors.contra.msg %> </p>  
 			<% } %> 
 			<% if (locals.errors && errors.user){ %>
 				<p> Cuidado!: <%= errors.user.msg %> </p>  

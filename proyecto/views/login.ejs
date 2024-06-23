@@ -25,7 +25,7 @@
 
 					<div>
 						
-						<label for = ""> Usuario: </label> <br><br> 
+						<label for = ""> Email: </label> <br><br> 
 						<input type="email" name="email" value="<%= locals.old && old.email ? old.email : '' %>"><br><br>
 		
 					</div>
@@ -33,8 +33,8 @@
 				   
 					<div> 
 						
-						<label for="Pass">contraseña:</label> <br><br>
-						<input type="password" id="Pass" name= contrasenia value="">  <br><br>
+						<label for="Pass"> Contraseña:</label> <br><br>
+						<input type="password" id="Pass" name= contra value="">  <br><br>
 					</div>
 		
 					<div> 
@@ -53,8 +53,8 @@
 			<% if (locals.errors && errors.email){ %> 
 				<p> Cuidado!: <%= errors.email.msg %> </p>  
 			<% } %>  
-			<% if (locals.errors && errors.contrasenia){ %>
-				<p> Cuidado!: <%= errors.contrasenia.msg %> </p>  
+			<% if (locals.errors && errors.contra){ %>
+				<p> Cuidado!: <%= errors.contra.msg %> </p>  
 			<% } %>  
 
 

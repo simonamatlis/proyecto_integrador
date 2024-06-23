@@ -9,17 +9,21 @@ const bcrypt = require('bcryptjs');
 
 const userController = {
     register : function(req,res){
-        if (req.session.usuarioLogueado){
+        if (req.session.usuarioLogueado != undefined){
             return res.redirect('/users/profile' + req.session.usuarioLogueado.id)} //si ya está registrado, profile. 
         else{
             return res.render('register', {title: 'Registrate'});
-    }}, 
+    }
+    }, 
 
     registerInfo : function (req, res) {
-       
         let errors = validationResult(req);
+        // console.log(errors);
 
-        if (errors.isEmpty()){
+       if (errors.isEmpty()){
+          //  console.log(req.body);}
+            //console.log('req.body.profilePic:', req.body.profilePic);}
+            
             db.Usuario.create({
                 email: req.body.email,
                 usuario: req.body.usuario,
@@ -29,21 +33,22 @@ const userController = {
                 profilePic: req.body.profilePic
             })
             .then(function(result){
-                return res.redirect('/users/profile')
+                return res.redirect('/users/login');
             })
             .catch(function(e){
-                console.log(e)});
+                console.log(e)}
+            );
 
-         } else { return res.render('register', { title: 'Registrate',
+        } else { return res.render('register', { title: 'Registrate',
             errors: errors.mapped(),
             old: req.body});}
     },
 
-    login : function (req,res){
+    login: function (req,res){
             if (req.session.usuarioLogueado != undefined){
                 return res.redirect('/profile' + req.session.usuarioLogueado.id)}
             else{
-                return res.render('login', {title: 'login'});
+                return res.render('login', {title: 'login'})
     }},
 
     loginInfo: function (req,res){
@@ -53,7 +58,7 @@ const userController = {
         
         // TRAIGO DEL FORM LA DATA Y LO GUARDO EN SESSION
             let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
-            let pass = req.body.contrasenia;
+            let pass = req.body.contra;
             req.session.pass = pass; 
             
             let recordarme = req.body.recordarme;
@@ -67,7 +72,7 @@ const userController = {
                 .then(function(usuarioEncontrado){
                     //return res.send(usuarioEncontrado)
                     if (usuarioEncontrado != null ){
-                        usuarioEncontrado = req.session.Usuario    // ahí lo guardé en sesión
+                        usuarioEncontrado = req.session.usuarioLogueado    // ahí lo guardé en sesión
                         if (recordarme != undefined){
                             res.cookie('Usuario', usuarioEncontrado.id, {maxAge: 1000*60*5})
                             
@@ -79,16 +84,7 @@ const userController = {
                 }).catch (function(e){
                             console.log(e);
                         });
-                        // // si puso bien la contra y existe:
-                        // if ( bcrypt.compareSync(contrasenia, usuarioEncontrado.pass)) {
-                        //     //ponerlos en session.
-                        //     req.session.user = {
-                        //         email: usuarioEncontrado.email,
-                        //         passWord: usuarioEncontrado.pass}
-                            
-                    
-
-                        // }  
+                      
             } else {
                 res.render ('login', { title: 'Login',
                     errors: errors.mapped(),
@@ -149,7 +145,7 @@ const userController = {
             let viejo= {
                     emailUser:  req.body.email,
                     nombreUser: req.body.usuario,
-                    contraUser: bcrypt.hashSync(req.body.contrasenia,10),
+                    contraUser: bcrypt.hashSync(req.body.contra,10),
                     fechaUser : req.body.fecha,
                     dniUser: req.body.dni,
                     profilePicUser: req.body.profilePic
@@ -162,15 +158,15 @@ const userController = {
                 
                     req.session.usuarioLogueado.nombreUser = req.body.usuario;
                     
-                    req.session.usuarioLogueado.contraUser = bcrypt.hashSync(req.body.contrasenia,10);
+                    req.session.usuarioLogueado.contraUser = bcrypt.hashSync(req.body.contra,10);
                     
                     req.session.usuarioLogueado.fechaUser= req.body.fecha;
                     
                     req.session.usuarioLogueado.dniUser= req.body.dni;
                     
-                    req.session.usuarioL.profilePicUser = req.body.profilePic
+                    req.session.usuarioLogueado.profilePicUser = req.body.profilePic
 
-                    res.locals.usuarioLogueado = req.session.usuarioLogueado
+                    res.locals.user = req.session.usuarioLogueado
 
                     return res.redirect('/profile' + req.session.usuarioLogueado.id);
                 })

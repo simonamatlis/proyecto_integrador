@@ -26,23 +26,23 @@ let userValidations = [
         }),
 
             
-    body ('contrasenia')
+    body ('contra')
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
         .custom (function(value, {req}){
             return db.Usuario.findOne({
-                where: {email: value }
+                where: {email: req.body.email }
             })
             .then(function(user){
-                if (!user){
-                    throw new Error('El usuario es inexistente')
-
-                }else{
-                        // para que verifique que la pass sea la correcta:
-                        let check= bcrypt.compareSync(contrasenia, user.contra)
-                        if (!check){
-                            throw new Error('Contraseña incorrecta')
-                        }
+                if (user != undefined){
+                    // para que verifique que la pass sea la correcta:
+                    let check= bcrypt.compareSync(req.body.contra, user.contra)
+                    if (!check){
+                        throw new Error('Contraseña incorrecta')
+                    }
                     
+
+                }else{    
+                    throw new Error('El usuario es inexistente')
                 }
             })
         })
@@ -84,7 +84,7 @@ let userEditValidation =[
 
     body ('user').notEmpty().withMessage('Por favor complete el campo con su nombre.'),
     
-    body('contrasenia')
+    body('contra')
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
         .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.')
     

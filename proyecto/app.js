@@ -30,6 +30,27 @@ app.use(session({
 				saveUninitialized: true }
 ));
 
+// app.use(function(req,res,nex){
+//   if (req.cookies.Usuario !== undefined && req.session.usuarioLogueado === undefined){
+//     const id = req.cookies.Usuario;
+//     db.Usuario.findByPk(id)
+//     .then(function(result){
+//       req.session.usuarioLogueado = result;
+//       res.locals.user = result;
+//       return next()
+//     })
+//     .catch(function(e){
+//       console.error(e);
+//       return next();
+//     });
+//   } else {
+//     if (req.session.usuarioLogueado !== undefined){
+//       res.locals.user = req.session.usuarioLogueado
+//     }
+//    return next();
+//   }
+// });
+
 //Para pasar info de session a una vista --> si abre una session, pasa el req al res 
 app.use(function(req, res, next) {
   if (req.session.usuarioLogueado != undefined) {
