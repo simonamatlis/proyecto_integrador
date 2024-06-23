@@ -7,7 +7,7 @@ module.exports= {
     "dialect": "mysql", 
     "port": 3306,
   },
-  "development_8889": {
+  "development" : {
     "username": "root",
     "password": "root",
     "database": "proyectoInt2",
