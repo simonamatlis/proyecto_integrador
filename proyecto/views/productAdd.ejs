@@ -20,39 +20,33 @@
 				<h2 class="products-title">Agrega productos!</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i><br>
+			<h2 class="col-12"> 
 				 
-				<form action="./producto/agregarUpdated" method="POST">
+				<form action="./producto/agregar" method="POST">
 
-					<div>
-						
-						<label for = "imgProducto"> Imagen del producto: </label>
-						<input type="file" name="imgProducto" value="" placeholder="foto de producto"> <br><br>
+<label for="nombre_imagen">Imagen:</label> 
+        <input type="text" name="nombre_imagen" value="<%= productos.nombre_imagen %>" required>
+        <br>
+        <br>
+        <label for="nombre_producto">Nombre del producto:</label>
 
-					</div>
+        <input type="text" name="nombre_producto" value="<%= productos.nombre_producto %>" required>
+        <br>
+        <br>
+        <label for="descripcion_producto">Descripcion:</label>
 
-					<div>
-						
-						<label for = "nameProducto"> Nombre del producto: </label>
-						<input type="text" name="nameProducto" value="" placeholder="nombre de producto"><br><br>
+        <input type="text" name="descripcion_producto" value="<%= productos.descripcion_producto %>" required>
+        <br>
+        <br>
 
-					</div>
-
-					<div>
-						
-						<label for = "descProducto"> descripción del producto: </label>
-						<input type="text" name="descProducto" value="" placeholder="descripcion de producto"> <br><br>
-
-					</div>
-
-					<button type="submit">Agregar producto</button>
+			<button type="submit">Agregar producto</button>
 
 
 
 
-				</form>
+		</form> <br>
 
-			</h2>
+			
 
 
 	<!-- footer -->

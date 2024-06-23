@@ -16,16 +16,28 @@
             <h2 class="products-title"> Editar productos</h2>
         </div>
 
-        <form action="/products/productEdit/<%= random %>" method="POST" class="">
-        <label class="imagen">Imagen</label> 
-        <input type="text" name="imagenes" placeholder="foto de productos">
+        <h2 class="col-12">
+            <form action="/products/agregarUpdated/<%= id_producto %>" method="POST" >
+                
+                
+                
+<label for="nombre_imagen">Imagen:</label> 
+        <input type="text" name="nombre_imagen" value="<%= productos.nombre_imagen %>" required>
+        <br>
+        <br>
+        <label for="nombre_producto">Nombre del producto:</label>
 
-        <input type="text" name="nombreproducto" placeholder="nombre producto">
+        <input type="text" name="nombre_producto" value="<%= productos.nombre_producto %>" required>
+        <br>
+        <br>
+        <label for="descripcion_producto">Descripcion:</label>
 
-        <input type="text" name="descProducto" placeholder="Descripcion producto">
+        <input type="text" name="descripcion_producto" value="<%= productos.descripcion_producto %>" required>
+        <br>
+        <br>
 
-        <button type="submit">Modificar producto</button>
-    </form>
+        <button type="submit">Editar producto</button>
+    </form> <br>
  
     <%- include("./partials/footer") %>
 </body>
