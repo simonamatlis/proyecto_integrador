@@ -8,10 +8,12 @@ const userController = require("../controllers/userController");
 
 //validaciones del login
 let userValidations = [
+    
     body('email')
         .notEmpty().withMessage('Por favor complete el campo con su correo.')
         .isEmail().withMessage('Por favor ingrese un mail válido')
         .custom(function(value) {
+           console.log("test 01");
           return  db.Usuario.findOne({
                 where: {email: value}
             })
@@ -19,16 +21,16 @@ let userValidations = [
                 if (!user){
                     throw new Error('El email no se encuentra registrado')
                 } else {
-                    
                 }
             })
-            
+           
         }),
 
             
     body ('contra')
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
         .custom (function(value, {req}){
+            console.log("test 1");
             return db.Usuario.findOne({
                 where: {email: req.body.email }
             })
@@ -36,8 +38,9 @@ let userValidations = [
                 if (user != undefined){
                     // para que verifique que la pass sea la correcta:
                     let check= bcrypt.compareSync(req.body.contra, user.contra)
+                    // console.log('====ok===='+check)
                     if (!check){
-                        throw new Error('Contraseña incorrecta')
+                        throw new Error('Contraseña incorrecta'+" enviando= "+req.body.contra + " esperando = "+user.contra)
                     }
                     
 

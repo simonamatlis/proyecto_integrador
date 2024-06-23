@@ -56,28 +56,42 @@ const userController = {
         let errors = validationResult(req);
         //return res.send(errors)
         
-        // TRAIGO DEL FORM LA DATA Y LO GUARDO EN SESSION
-            let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
+        // TRAIGO DEL FORM LA DATA Y LO GUARDO EN LA COOKIE PARA EL USO DE LA SESSION
+            let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.
+            req.session.nombreUsuario = nombreUsuario;
+
             let pass = req.body.contra;
             req.session.pass = pass; 
             
             let recordarme = req.body.recordarme;
             req.session.guardar = recordarme; 
-        
-            // los errores que traigo de la validación, parte almacenada en ruta
-            
 
+           
+          
+            
+            
+            // los errores que traigo de la validación, parte almacenada en ruta
             if (errors.isEmpty ()){
-                db.Usuario.findOne({ where: [{email: nombreUsuario }]})
+                db.Usuario.findOne({ where: { email: nombreUsuario } })
                 .then(function(usuarioEncontrado){
-                    //return res.send(usuarioEncontrado)
+                    console.log('====> usuarioEncontrado = : ' , usuarioEncontrado)
                     if (usuarioEncontrado != null ){
-                        usuarioEncontrado = req.session.usuarioLogueado    // ahí lo guardé en sesión
+                        
+                         console.log('==== usuarioEncontrado req.session = : ' ,req.session.usuarioEncontrado)
+                         console.log('==== 2 usuarioEncontrado req.session = : ' ,usuarioEncontrado)
+
                         if (recordarme != undefined){
-                            res.cookie('Usuario', usuarioEncontrado.id, {maxAge: 1000*60*5})
-                            
+
+                            console.log('== paso por aca ....' )
+                            console.log('== controller id  = : ' ,usuarioEncontrado)
+
+                            res.cookie('Usuario', usuarioEncontrado.id_usuario  , {maxAge: 1000*60*5})
+                            console.log('Usuario DEFINIDO  = : ' ,usuarioEncontrado)
                         }
-                        return res.redirect('/users/profile' + usuarioEncontrado.id);
+
+                        console.log('TOMA EL ID: ' ,usuarioEncontrado.id_usuario)
+                        return res.redirect('/users/profile' + usuarioEncontrado.id_usuario);
+                        
                      } else {
                         return res.redirect('/users/login');
                          }
@@ -93,6 +107,8 @@ const userController = {
                 // si encuentra errores, le aparecen los mensajes
                 
             } 
+
+
     },
             
     // FALTA VIEW PROFILE --> parte producto. 

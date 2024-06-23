@@ -1,3 +1,4 @@
+
 module.exports= {
   "development": {
     "username": "root",
@@ -5,7 +6,7 @@ module.exports= {
     "database": "proyectoInt2",
     "host": "127.0.0.1",
     "dialect": "mysql", 
-    "port": 8889,
+    "port": 3306,
   },
  
   "test": {
