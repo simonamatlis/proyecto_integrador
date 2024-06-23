@@ -5,8 +5,16 @@ module.exports= {
     "database": "proyectoInt2",
     "host": "127.0.0.1",
     "dialect": "mysql", 
-    "port": 8889
+    "port": 3306,
   },
+  "development_8889": {
+    "username": "root",
+    "password": "root",
+    "database": "proyectoInt2",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "port": 8889},
+    
   "test": {
     "username": "root",
     "password": null,
