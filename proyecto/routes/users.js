@@ -11,15 +11,15 @@ let userValidations = [
     body('email')
         .notEmpty().withMessage('Por favor complete el campo con su correo.')
         .isEmail().withMessage('Por favor ingrese un mail válido')
-        .custom(function(value,{req}) {
-          return  db.User.findOne({
-                where: {email: req.body.email}
+        .custom(function(value) {
+          return  db.Usuario.findOne({
+                where: {email: value}
             })
             .then(function(user){
-                if (user != undefined){
-                    return true
-                } else {
+                if (!user){
                     throw new Error('El email no se encuentra registrado')
+                } else {
+                    
                 }
             })
             
@@ -28,9 +28,9 @@ let userValidations = [
             
     body ('contrasenia')
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
-        .custom (function(value){
-            return db.User.findOne({
-                Where: {email: value }
+        .custom (function(value, {req}){
+            return db.Usuario.findOne({
+                where: {email: value }
             })
             .then(function(user){
                 if (!user){
@@ -38,7 +38,7 @@ let userValidations = [
 
                 }else{
                         // para que verifique que la pass sea la correcta:
-                        let check= bcrypt.compareSync(contrasenia, contra)
+                        let check= bcrypt.compareSync(contrasenia, user.contra)
                         if (!check){
                             throw new Error('Contraseña incorrecta')
                         }
@@ -50,14 +50,14 @@ let userValidations = [
 
 // validaciones del register
 let registerValidations = [
-    body('mail')
+    body('email')
         .notEmpty().withMessage('Por favor complete el campo con su correo.')
         .isEmail().withMessage('Por favor ingrese un mail válido'),
 
 
-    body ('user').notEmpty().withMessage('Por favor complete el campo con su nombre.'),
+    body ('usuario').notEmpty().withMessage('Por favor complete el campo con su nombre.'),
     
-    body('contrasenia')
+    body('contra')
         .notEmpty().withMessage('Por favor complete el campo con una contraseña')
         .isLength({min: 4}).withMessage( 'Su contraseña debe tener mínimo 4 caracteres.')
     

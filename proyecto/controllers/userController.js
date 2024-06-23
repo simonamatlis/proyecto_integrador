@@ -12,21 +12,21 @@ const userController = {
         if (req.session.usuarioLogueado){
             return res.redirect('/users/profile' + req.session.usuarioLogueado.id)} //si ya está registrado, profile. 
         else{
-            return res.render('register', {title: 'Registrate', usuario: data.usuario});
+            return res.render('register', {title: 'Registrate'});
     }}, 
 
     registerInfo : function (req, res) {
        
-        let errors = validationUser(req);
+        let errors = validationResult(req);
 
         if (errors.isEmpty()){
             db.Usuario.create({
                 email: req.body.email,
-                user: req.body.usuario,
-                contra: bcrypt.hashSync(req.body.contrasenia,10), // passw encriptada + sincronizada c/el formulario
+                usuario: req.body.usuario,
+                contra: bcrypt.hashSync(req.body.contra,10), // passw encriptada + sincronizada c/el formulario
                 fecha: req.body.fecha,
-                dni: req.body.documento,
-                profilePic: req.body.fotoPerfil
+                dni: req.body.dni,
+                profilePic: req.body.profilePic
             })
             .then(function(result){
                 return res.redirect('/users/profile')
@@ -34,7 +34,7 @@ const userController = {
             .catch(function(e){
                 console.log(e)});
 
-         } else { res.render('register', { title: 'Registrate',
+         } else { return res.render('register', { title: 'Registrate',
             errors: errors.mapped(),
             old: req.body});}
     },
@@ -49,6 +49,7 @@ const userController = {
     loginInfo: function (req,res){
 
         let errors = validationResult(req);
+        //return res.send(errors)
         
         // TRAIGO DEL FORM LA DATA Y LO GUARDO EN SESSION
             let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.Puse nombreUsuario, podría haber usado otro nombre.
@@ -64,6 +65,7 @@ const userController = {
             if (errors.isEmpty ()){
                 db.Usuario.findOne({ where: [{email: nombreUsuario }]})
                 .then(function(usuarioEncontrado){
+                    //return res.send(usuarioEncontrado)
                     if (usuarioEncontrado != null ){
                         usuarioEncontrado = req.session.Usuario    // ahí lo guardé en sesión
                         if (recordarme != undefined){
@@ -119,13 +121,13 @@ const userController = {
     // FALTA REVISAR TODO EL EDIT 
     profileEdit: function (req,res){
         
-        if (req.session.usuarioLogueado){
+        if (req.session.usuarioLogueado != undefined){
             let id = req.session.usuarioLogueado.id;
 
             db.Usuario.finfByPk(id)
             .then(function(usuario){
                 if(usuario) {
-                res.render('profile-edit',{title: 'Edit profile', usuario: usuario});
+                    return res.render('profile-edit',{title: 'Edit profile', usuario: usuario});
                 } 
                 else{
                    return function(error){
@@ -140,7 +142,7 @@ const userController = {
        
     },
     profileEditInfo: function(req,res) {
-        let errors = validationUser(req);
+        let errors = validationResult(req);
 
         if (errors.isEmpty()){
 
@@ -149,9 +151,10 @@ const userController = {
                     nombreUser: req.body.usuario,
                     contraUser: bcrypt.hashSync(req.body.contrasenia,10),
                     fechaUser : req.body.fecha,
-                    dniUser: req.body.documento,
-                    profilePicUser: req.body.fotoPerfil
+                    dniUser: req.body.dni,
+                    profilePicUser: req.body.profilePic
                 }  
+
                 db.Usuario.update(viejo, {where:{id: req.session.usuarioLogueado.id}})
                 .then(function(result)
                 {
@@ -163,9 +166,9 @@ const userController = {
                     
                     req.session.usuarioLogueado.fechaUser= req.body.fecha;
                     
-                    req.session.usuarioLogueado.dniUser= req.body.documento;
+                    req.session.usuarioLogueado.dniUser= req.body.dni;
                     
-                    req.session.usuarioL.profilePicUser = req.body.fotoPerfil
+                    req.session.usuarioL.profilePicUser = req.body.profilePic
 
                     res.locals.usuarioLogueado = req.session.usuarioLogueado
 
@@ -184,12 +187,6 @@ const userController = {
                     .catch(function(error){
                         console.log(error)
                     });
-
-                    // if (req.session.usuarioLogueado) {
-                    //let id = req.session.usuarioLogueado.id;
-
-
-
             }
    
     },

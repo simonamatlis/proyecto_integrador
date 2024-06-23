@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-<%- include('./partials/head') %>
-
+<%- include('./partials/head')%>
 
 <body>
 	<!-- Header -->
 	<% if (locals.user != undefined){%>
-		<%- include('./partials/headerLogueado')<%} 
-		else {%>
+		<%- include('./partials/headerLogueado')%>
+		<%} else {%>
 			<%- include('./partials/header')%> 
 			<% } %>
 
@@ -27,60 +26,60 @@
 
 				<div>
 					
-					<label for = "email"> Email: </label>
-					<input type="email" name="mail" value="<%= locals.old && old.email ? old.email : '' %>">  <br><br>
+					<label for = "email" class="form-label"> Email: </label>
+					<input type="email" name="email" value="<%= locals.old && old.email ? old.email : '' %>">  <br><br>
 
 				</div>
 
 
 				<div>
 					
-					<label for = "user"> Nombre Usuario: </label>
-					<input type="text" name="usuario" value="<%= locals.old && old.user ? old.user : '' %>"> <br><br>
+					<label for = "user" class="form-label"> Nombre Usuario: </label>
+					<input class="form-input" type="text" name="usuario" value="<%= locals.old && old.user ? old.user : '' %>"> <br><br>
 
 				</div>
 
 			
 				<div> 
 				
-					<label for="Pass"> Contraseña:</label>
-					<input type="password" id="Pass" name="contrasenia"  value=""> <br><br>
+					<label for="Pass" class="form-label"> Contraseña:</label>
+					<input class="form-input" type="password" id="Pass" name="contra"  value="<%= locals.old && old.user ? old.user : '' %>"> <br><br>
 				</div>
 
 				<div> 
 				
-					<label for="date"> Fecha de nacimiento: </label>
-					<input type="date" id="date" name="fecha" value="">  <br><br>
+					<label for="date" class="form-label"> Fecha de nacimiento: </label>
+					<input class="form-input" type="date" id="date" name="fecha" value="<%= locals.old && old.user ? old.user : '' %>">  <br><br>
 				</div>
 
 				<div> 
 					
-					<label for="dni"> Nro de documento: </label>
-					<input type="number" id="dni" name="documento" value="">  <br><br>
+					<label for="dni" class="form-label"> Nro de documento: </label>
+					<input class="form-input" type="number" id="dni" name="dni" value="<%= locals.old && old.user ? old.user : '' %>">  <br><br>
 
 				</div>
 
 				<div> 
 					
-					<label for="profilepic"> Foto de perfil: </label>
-					<input type="text" id="profilepic" name="fotoPerfil" value=""> <br><br>
+					<label for="profilepic" class="form-label"> Foto de perfil: </label>
+					<input class="form-input" type="text" id="profilepic" name="profilepic" value="<%= locals.old && old.user ? old.user : '' %>"> <br><br>
 				</div>
 				
-				<button type="submit">Enviar datos</button>
+				<button class=" form" type="submit">Enviar datos</button>
 
 
 			</form> 
 			
 
-			<p> Cuidado!: </p> 
+			
 			<% if (locals.errors && errors.email){ %> 
-				<p> <%= errors.email.msg %> </p>  
+				<p> Cuidado!: <%= errors.email.msg %> </p>  
 			<% } %>  
 			<% if (locals.errors && errors.contrasenia){ %>
-				<p> <%= errors.contrasenia.msg %> </p>  
+				<p> Cuidado!: <%= errors.contrasenia.msg %> </p>  
 			<% } %> 
 			<% if (locals.errors && errors.user){ %>
-				<p> <%= errors.user.msg %> </p>  
+				<p> Cuidado!: <%= errors.user.msg %> </p>  
 			<% } %> 
 		
 		
