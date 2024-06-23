@@ -10,7 +10,7 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= producto[0].nombre%> </h2> 
+			<h2 class="products-title"> Productos </h2> 
 			<p class="product-detail-description">
 				<a href="/producto/agregar">Editar</a>
 			</p>
@@ -18,18 +18,23 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src= <%= producto[0].imagen %> alt="" class="product-detail-img">
-					<strong><p class="product-detail-description"><%= producto[0].description %></p></strong>
+					<img src= <%= productos.nombre_imagen %> alt="" class="product-detail-img">
+					<strong><p class="product-detail-description"><%= productos.descripcion_producto %></p></strong>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<% for( let index = 0; index < producto[0].comentarios.length; index++ ) { %> 
-							<article>
-								<img src= <%= producto[0].comentarios[index].imagen %> alt=''> 
-								<strong><%= producto[0].comentarios[index].nombreUsuario %> </strong> <br></br>
-								<%= producto[0].comentarios[index].comentario %>
-							</article>
+						<% if (productos.comentarios && productos.comentarios.length > 0) { %>
+							<% for( let index = 0; index < productos.comentarios.length; index++ ) { %> 
+								<article>
+									<img src= <%= productos.comentarios[index].imagen %> alt=''> 
+									<strong><%= productos.comentarios[index].nombreUsuario %> </strong> <br></br>
+									<%= productos.comentarios[index].comentario %>
+								</article>
 						<% } %>
+					<% } else { %> 
+					   <p>No hay comentarios</p>
+					<% } %>
+
 					</section>
 
 					<form class="form" action="" method="POST">
