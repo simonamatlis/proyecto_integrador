@@ -38,21 +38,23 @@
 				
 				<ul class="right-navbar">
 					<!-- Mi perfil  -->
-					<li><a href="/users/profile">
-						<%= locals.user.user %> <i class="fas fa-user"></i>
+				<ul class="right-navbar">
+					<li><a href="/users/profile/id/<%=user.id%>">
+							Tu perfil  <%= locals.user.user %> <i class="fas fa-user"></i>
 						</a>
 					</li>
+				</ul> 
+
 
 					<!-- Editar perfil  -->
 					<li>
-						<a href="/users/profile-edit">
-						edita tu perfil <%= locals.user.user %> <i class="fas fa-user"></i>
+						<a href="/users/edit"> 	Edita tu usuario <%= locals.user.user %> <i class="fas fa-user"></i>
 						</a>
 					</li>
 
 					<!-- logOut-->
 					<li> 
-						<form action="/users/logout" method="POST">
+						<form action="/users/logOut" method="POST">
 							<button class="logout" type="'submit">
 									Cerrar Sesión  <i class="fas fa-user"></i>
 							</button>

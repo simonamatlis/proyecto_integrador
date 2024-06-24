@@ -1,71 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
-<%-include('./partials/head', {title: title}) %>
+<%- include('./partials/head')%>
+
 <body>
-	<!-- Header  dependiendo si se logueo o no-->
-	<%-  if (locals.user != undefined){%>
-		<%- include('./partials/headerLogueado')<%} else {%>
+	<!-- Header -->
+	<% if (locals.user != undefined){%>
+		<%- include('./partials/headerLogueado')%>
+		<%} else {%>
 			<%- include('./partials/header')%> 
 			<% } %>
-	<!-- /Header -->
-	
 
+			
 	<!-- Datos del usuario -->
 	<section class="info-usuario container products-wrapper">
 		<div class="row">
 			<div class="img-container offset-3 col-2">
-				<img src="<%= Usuario.profilePic %>" alt="foto de perfil" class="foto-perfil">
+				<img src="<%= usuario.profilePic %>" alt="'Foto de perfil" class="foto-perfil" />
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"> <%= Usuario.usuario %> 
-						<a href="/users/register"> <!-- ruedita -->
-							<i class="fas fa-cog"></i>
-						</a>
+					<h1 class="main-title"> <%= usuario.usuario %> 
+						<% if(locals.user != undefined && locals.user.id == id ) {%> 
+							<a href="/users/edit"> <!-- ruedita -->
+								<i class="fas fa-cog"></i>
+							</a>
+							<a class="btn mt-3 ml-4" href="">SEGUIR</a>
+
+						<%} %>
 					</h1>
-					<a class="btn mt-3 ml-4" href="">SEGUIR</a>
 				</div>
-				<div>
-					<ul class="">
-						<li><%= Usuario.email %></li>
-						<li>8 productos</li>
-						<li>200 seguidores</li>
-						<li>300 comentarios</li>
-					</ul>
-				</div>
+				<h5 class="subtitle"><%= usuario.email %> </h5>
+				
 			</div>
 		</div>
 	</section>
-	<!-- /Datos del usuario -->
+	<!-- Datos del usuario -->
 
 	<!-- Mis productos -->
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Mis productos</h2>
+				<% if (usuario.productos.lenght >0){ %>
+					<h2 class="products-title">Mis productos</h2>
+					<ul class="">
+						<li> Usted tiene  <%= usuario.productos.lenght %>  productos. </li>
+						<li>200 seguidores</li>
+						<li> comentarios: <%=usuario.comentarios.lenght%> </li>
+					</ul>
+					
+				<%} else{ %> 
+					<h2 class="products-title">Aún no tienes productos</h2>
+				<%} %>	
 			</div>
-			<!-- Show mis productos -->
-			<% for( let index = 0; index < data.producto.length; index++ ) {%>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/producto/productos">
-							<figure class="product-box_image">
-								<img src="<%= producto[index].imagen %>" >
-							</figure>
-							<article class="product-box_data">
-								<h2> <%= producto[index].nombre %></h2>
-								<p><%= producto[index].description %></p>
-								<p>Comentarios: <%= producto[index].comentarios.length %></p>
-							</article>
-						</a>
-					</section>
-				</div>
-			<% } %>
-		</div>
-	</div>
-	<!-- /Mis productos -->
+	<!-- Mis productos -->
 
+	<!-- Show mis productos -->
+	<% for (let i=0 ; usuario.productos.lenght> i ; i++) { %>
+		<div class="col-12 col-sm-6 col-lg-3">
+			<section class="product-box">
+				<a href="/producto/id/<%= usuario.productos[i].id%>">
+					<figure class="product-box_image">
+						<img 
+							src="<%= usuario.productos[i].imagen%>"
+							alt="<%= usuario.productos[i].nombre%>"
+						/>
+					</figure>	
+						
+					<article class="product-box_data">
+						<h2><%= usuario.productos[i].nombre%></h2>
+						<p><%= usuario.productos[i].descripcion%></p>
+						<p><a href="/users/id/<%= usuario.id%>"> <%= usuario.usuario %></a></p>
+					</article>
+				</a>
+			</section>
+		</div>
+	<%} %>
+	</div>
+</div>
 
 	<!-- footer -->
 	<%- include('./partials/footer') %>

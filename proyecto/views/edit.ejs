@@ -22,7 +22,7 @@
 			
 			
 
-			<form action="/users/registerStore" method="POST">
+			<form action="/users/edit" method="POST">
 
 				<div>
 					
@@ -76,7 +76,7 @@
 				<p> Cuidado!: <%= errors.email.msg %> </p>  
 			<% } %>  
 			<% if (locals.errors && errors.contra){ %>
-				<p> Cuidado!: <%= errors.contrasenia.msg %> </p>  
+				<p> Cuidado!: <%= errors.contra.msg %> </p>  
 			<% } %> 
 			<% if (locals.errors && errors.user){ %>
 				<p> Cuidado!: <%= errors.user.msg %> </p>  

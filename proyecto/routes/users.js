@@ -102,10 +102,12 @@ router.get('/login', userController.login);
 router.post('/loginStore', userValidations, userController.loginInfo); 
 
 
-router.get('/profile/:id', userController.profile);
+router.get('/profile/id/:id', userController.profile);
 
 router.get('/edit', userController.profileEdit);
 router.post('/editStore',userEditValidation, userController.profileEditInfo)
+
+router.post('/logOut', userController.logOut)
 
 
 module.exports = router;

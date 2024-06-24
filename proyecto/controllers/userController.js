@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs');
 const userController = {
     register : function(req,res){
         if (req.session.usuarioLogueado != undefined){
-            return res.redirect('/users/profile' + req.session.usuarioLogueado.id)} //si ya está registrado, profile. 
+            return res.redirect('/users/profile/id/' + req.session.usuarioLogueado.id)} //si ya está registrado, profile. 
         else{
             return res.render('register', {title: 'Registrate'});
     }
@@ -76,21 +76,17 @@ const userController = {
                 .then(function(usuarioEncontrado){
                     console.log('====> usuarioEncontrado = : ' , usuarioEncontrado)
                     if (usuarioEncontrado != null ){
-                        
                          console.log('==== usuarioEncontrado req.session = : ' ,req.session.usuarioEncontrado)
-                         console.log('==== 2 usuarioEncontrado req.session = : ' ,usuarioEncontrado)
+                         
 
                         if (recordarme != undefined){
-
-                            console.log('== paso por aca ....' )
-                            console.log('== controller id  = : ' ,usuarioEncontrado)
 
                             res.cookie('Usuario', usuarioEncontrado.id_usuario  , {maxAge: 1000*60*5})
                             console.log('Usuario DEFINIDO  = : ' ,usuarioEncontrado)
                         }
 
                         console.log('TOMA EL ID: ' ,usuarioEncontrado.id_usuario)
-                        return res.redirect('/users/profile' + usuarioEncontrado.id_usuario);
+                        return res.redirect('/users/profile/id/' + usuarioEncontrado.id_usuario);
                         
                      } else {
                         return res.redirect('/users/login');
@@ -114,18 +110,18 @@ const userController = {
     // FALTA VIEW PROFILE --> parte producto. 
     profile: function(req,res){
         //params porq es id. 
-        let id = req.params.id;
-        //para que aparezcan los productos /comentarios de forma ordenada
-        let modelos = {
-            include:[{association: 'producto'},
-                      {association: 'comentarios' }],
-            order: [{model: db.Producto, as: 'producto'}, 'createdAt', 'DESC']
-        }
+        let id = req.params.id
+        //res.send(id);
 
-        db.Usuario.findByPk(id, modelos)
+        db.Usuario.findByPk(id, {
+                include:[{association: 'productos'},
+                          {association: 'comentarios' }]
+            })
         .then(function(usuario){
-            if ( req.session.usuarioLogueado && req.session.usuarioLogueado.id == results.id)
-            return res.render('profile', {title: `${usuario.email}`, usuario: usuario, productos: usuario.producto, comentarios: usuario.comentarios.legth});
+
+        //  return res.send(usuario);
+            
+            return res.render('profile', {title: 'perfil', usuario: usuario, id: id});
         }). catch(function(error){
             console.log(error)
         })
@@ -138,13 +134,7 @@ const userController = {
 
             db.Usuario.finfByPk(id)
             .then(function(usuario){
-                if(usuario) {
-                    return res.render('profile-edit',{title: 'Edit profile', usuario: usuario});
-                } 
-                else{
-                   return function(error){
-                   console.log(error)}}
-                })
+                return res.render('edit',{title: 'Edit profile', usuario: usuario})})
             .catch(function(error){
                 console.log(error)
             });
@@ -155,6 +145,7 @@ const userController = {
     },
     profileEditInfo: function(req,res) {
         let errors = validationResult(req);
+        let id = req.session.usuarioLogueado.id;
 
         if (errors.isEmpty()){
 
@@ -193,7 +184,7 @@ const userController = {
 
                     db.Usuario.findByPk(req.session.usuarioLogueado.id)
                     .then(function(usuario){
-                        return res.render('profile-edit', {title: 'Edita tu perfil', errors: errors.mapped()
+                        return res.render('edit', {title: 'Edita tu perfil', errors: errors.mapped()
                     , old: req.body, usuario: usuario })
                     })
                     .catch(function(error){
@@ -205,7 +196,7 @@ const userController = {
 
     logOut: function(req,res) {
         req.session.destroy()
-        res.clearCookie(Usuario)
+        res.clearCookie('Usuario')
         return res.redirect('/')
         
     }
