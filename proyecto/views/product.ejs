@@ -4,7 +4,12 @@
 <%- include('./partials/head', {title: title}) %>
 <body>
 	<!-- Header -->
-	<%- include('./partials/header') %>
+	<% if(locals.UserName){ %>
+		<%- include('./partials/header') %>
+		<% } else{ %>
+			<%- include('./partials/header')%>
+		<% } %>
+	
 	<!-- /Header -->
 	
 	<!-- product detail -->
@@ -18,17 +23,17 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src= <%= productos.nombre_imagen %> alt="" class="product-detail-img">
-					<strong><p class="product-detail-description"><%= productos.descripcion_producto %></p></strong>
+					<img src= <%= producto.nombre_imagen %> alt="" class="product-detail-img">
+					<strong><p class="product-detail-description"><%= producto.descripcion_producto %></p></strong>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<% if (productos.comentarios && productos.comentarios.length > 0) { %>
-							<% for( let index = 0; index < productos.comentarios.length; index++ ) { %> 
+						<% if (producto.comentarios && producto.comentarios.length > 0) { %>
+							<% for( let index = 0; index < producto.comentarios.length; index++ ) { %> 
 								<article>
-									<img src= <%= productos.comentarios[index].imagen %> alt=''> 
-									<strong><%= productos.comentarios[index].nombreUsuario %> </strong> <br></br>
-									<%= productos.comentarios[index].comentario %>
+									<img src= <%= producto.comentarios[index].imagen %> alt=''> 
+									<strong><%= producto.comentarios[index].nombre %> </strong> <br></br>
+									<%= producto.comentarios[index].comentario %>
 								</article>
 						<% } %>
 					<% } else { %> 
