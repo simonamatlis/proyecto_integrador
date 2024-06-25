@@ -39,8 +39,8 @@ const productController = {
         let id_producto = req.params.id
         producto.findByPk(id_producto)
         .then((result)=>{
-            console.log(result);
-            return res.render("productAdd",{producto: result})
+            
+            return res.render("productEdit",{producto: result})
         })
         .catch((err) => {
             console.log(err);
@@ -73,10 +73,30 @@ const productController = {
             console.log(err);
         });
         
+
+        
+    },
+    borrarProducto: function(req,res) {
+        let id_producto = req.params.id;
+        if(req.session.user != undefined) {
+           product.destroy({
+            where: { id : id_producto}
+        })
+        .then(function(result){
+            return res.redirect("/profile")
+        })
+        .catch(function(error){
+            return res.send(error)
+        })
+    } else {
+        return res.render("/producto/productos/:id)${req.params.id}")
+    
+        }
+
     }
     
 
-}; 
+};
 
 
 

@@ -13,6 +13,7 @@ router.post('/agregar', productController.guardaInfo );
 
 router.get("/editar/:id" , productController.productEdit);
 router.post("/editar/:id", productController.edit_product);
+router.post("/productos/:id/borrar", productController.borrarProducto);
 
 
 

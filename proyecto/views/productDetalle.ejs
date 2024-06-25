@@ -1,30 +1,25 @@
 <!DOCTYPE html>
-<html lang="es">
-<!-- Include Head -->
+<html lang="en">
+
 <%- include('./partials/head') %>
 
 <body>
-	<!-- Header -->
-	<% if(locals.user != undefined) { %>
-		<%- include('./partials/headerLogueado') %>
-<% } else { %>
-	<%- include("./partials/header") %>
-<% } %>
-	
-	<!-- /Header -->
-
-	<!-- Novedades -->
-	<div class="container products-wrapper">
+    <% if (locals.user != null) { %>
+        <%- include('./partials/headerLogueado') %>
+    <% } else { %>
+        <%- include('./partials/headerDeslogueado') %>
+    <% } %>
+    
+    <div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Agrega productos!</h2>
+				<h2 class="products-title">Borrar roductos</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
 			<h2 class="col-12"> 
-				 
-				<form action="/producto/agregar/" method="POST">
 
-<label for="nombre_imagen">Imagen:</label> 
+                <form action="/producto/productos/:id/borrar" method="POST">
+                    <label for="nombre_imagen">Imagen:</label> 
         <input type="text" name="nombre_imagen" value="" required>
         <br>
         <br>
@@ -39,19 +34,18 @@
         <br>
         <br>
 
-			<button type="submit">Agregar producto</button>
+			<button type="submit">Borrar producto</button>
 
 
 
 
 		</form> <br>
 
-			
-
-
-	<!-- footer -->
+    <!-- footer -->
 	<%- include('./partials/footer') %>
 	<!-- /footer -->
 </body>
 
 </html>
+             
+
