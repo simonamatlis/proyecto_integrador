@@ -11,9 +11,9 @@ const productController = {
         producto.findByPk(id_producto, {
             include: [ { association: "usuario"}, { association: "comentarios" , include: [{ association: "usuario"}]}]
         })
-        .then((data)=>{
+        .then((result)=>{
         //debería poner db.productos?
-        res.render('product',{title: 'Detalle del producto', producto: data});
+        res.render('product',{title: 'Detalle del producto', producto: result});
         })
         .catch((err) =>{console.log(err);})
 
@@ -24,13 +24,13 @@ const productController = {
             user_id: req.session.userName.id,
             comentarios: req.body.comentarios,
         })
-        return res.redirect("producto/productos/"+ req.params.id)
+        res.redirect("/product/" + req.params.id)
 
     },
 
 
     newProduct : function(req,res){
-        return res.render("productAdd", {title: "Añadir producto", userName: data.usuario.userName});
+        return res.render("productAdd", {title: "Añadir producto", userName: req.session.userName});
         
         //debería poner db.usuario.id_usuario?
         
@@ -38,10 +38,13 @@ const productController = {
     productEdit: function(req,res){
         let id_producto = req.params.id
         producto.findByPk(id_producto)
-        .then((data)=>{
-            console.log(data);
-            return res.render("productAdd",{producto: data})
+        .then((result)=>{
+            console.log(result);
+            return res.render("productAdd",{producto: result})
         })
+        .catch((err) => {
+            console.log(err);
+        });
        
     },
         
@@ -63,7 +66,13 @@ const productController = {
             where: { id_producto: req.params.id}
 
         })
-        return res.redirect("/")
+        .then(() => {
+            res.redirect("/product/" + req.params.id);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+        
     }
     
 

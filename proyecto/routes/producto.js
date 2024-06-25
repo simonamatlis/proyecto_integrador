@@ -9,10 +9,11 @@ router.get("/productos/:id", productController.product);
 router.post("/commentAdd/:id", productController.commentAdd)
 
 router.get('/agregar', productController.newProduct )
-router.post('/agregarUpdated', productController.guardaInfo );
+router.post('/agregar', productController.guardaInfo );
 
-//router.post("/agregar", productController.productAdd);
-//router.post("/agregarUpdated", productController.edit_product)
+router.get("/editar/:id" , productController.productEdit);
+router.post("/editar/:id", productController.edit_product);
+
 
 
 module.exports = router;
