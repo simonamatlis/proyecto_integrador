@@ -41,11 +41,18 @@
 					<% } %>
 
 					</section>
+					<% if(locals.UserName){ %>
+						<form class="form" action="/productos/commentAdd/<%= producto.id%>" method="POST">
+							<input class="form-input" type="text" value="" name="comentario" placeholder="Agregar comentario">
+							<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+						</form>
 
-					<form class="form" action="" method="POST">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
-						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-					</form>
+					<% } else { %>
+						<a href="/users/login"><p> Debes iniciar sesionpara poder agregar comentarios</p></a>
+
+					<% } %>
+
+					
 					<hr>
 				</div>
 			</div>

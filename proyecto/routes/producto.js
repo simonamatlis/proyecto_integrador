@@ -6,6 +6,7 @@ var router = express.Router();
 //producto/agregar
 
 router.get("/productos/:id", productController.product);
+
 router.post("/commentAdd/:id", productController.commentAdd)
 
 router.get('/agregar', productController.newProduct )

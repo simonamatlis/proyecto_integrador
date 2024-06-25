@@ -24,7 +24,7 @@ const productController = {
             user_id: req.session.userName.id,
             comentarios: req.body.comentarios,
         })
-        res.redirect("/product/" + req.params.id)
+        res.redirect("/productos/commentAdd" + req.params.id)
 
     },
 
