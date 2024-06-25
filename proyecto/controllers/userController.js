@@ -46,7 +46,7 @@ const userController = {
 
     login: function (req,res){
             if (req.session.usuarioLogueado != undefined){
-                return res.redirect('/profile' + req.session.usuarioLogueado.id)}
+                return res.redirect('/profile/id/' + req.session.usuarioLogueado.id)}
             else{
                 return res.render('login', {title: 'login'})
     }},
@@ -58,36 +58,33 @@ const userController = {
         
         // TRAIGO DEL FORM LA DATA Y LO GUARDO EN LA COOKIE PARA EL USO DE LA SESSION
             let nombreUsuario = req.body.email; // traigo del formulario el mail y lo guardo.
-            req.session.nombreUsuario = nombreUsuario;
+            //req.session.nombreUsuario = nombreUsuario;
 
             let pass = req.body.contra;
-            req.session.pass = pass; 
+            //req.session.pass = pass; 
             
             let recordarme = req.body.recordarme;
-            req.session.guardar = recordarme; 
+            //req.session.guardar = recordarme; 
 
            
-          
-            
-            
             // los errores que traigo de la validación, parte almacenada en ruta
             if (errors.isEmpty ()){
                 db.Usuario.findOne({ where: { email: nombreUsuario } })
                 .then(function(usuarioEncontrado){
-                    console.log('====> usuarioEncontrado = : ' , usuarioEncontrado)
+                   //console.log('====> usuarioEncontrado = : ' , usuarioEncontrado)
+                   //return res.send(usuarioEncontrado);
+                   req.session.nombreUsuario = nombreUsuario;
+                   req.session.pass = pass; 
+                   req.session.guardar = recordarme; 
+
                     if (usuarioEncontrado != null ){
-                         console.log('==== usuarioEncontrado req.session = : ' ,req.session.usuarioEncontrado)
-                         
-
+                        // console.log('==== usuarioEncontrado req.session = : ' ,req.session.usuarioEncontrado)
                         if (recordarme != undefined){
-
                             res.cookie('Usuario', usuarioEncontrado.id_usuario  , {maxAge: 1000*60*5})
-                            console.log('Usuario DEFINIDO  = : ' ,usuarioEncontrado)
+                           // console.log('Usuario DEFINIDO  = : ' ,usuarioEncontrado)
                         }
-
-                        console.log('TOMA EL ID: ' ,usuarioEncontrado.id_usuario)
+                       // console.log('TOMA EL ID: ' ,usuarioEncontrado.id_usuario)
                         return res.redirect('/users/profile/id/' + usuarioEncontrado.id_usuario);
-                        
                      } else {
                         return res.redirect('/users/login');
                          }
